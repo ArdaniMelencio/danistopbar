@@ -18,15 +18,16 @@ Rect {
         Repeater {
             model: Hyprland.workspaces
 
-            CButton {
+            Button {
                 required property var modelData
-                canChange: !modelData.active
+
                 implicitWidth: root.width/10-(Settings.margin)
                 implicitHeight: root.height/2
 
-                bgColor: if (modelData.active) Qt.darker(Settings.theme.colours[0],1.2)
+                background: Rect{
+                    color: if (modelData.active) Qt.darker(Settings.theme.colours[0],1.2)
                         else if (!modelData.active) Settings.theme.colours[2]
-
+                }
 
                 CText { text : (modelData.id); anchors.centerIn: parent; font.pixelSize: Settings.fontSize*1.2}
 
