@@ -1,5 +1,5 @@
 import "../../config"
 
-Rect {
+CButton {
 
 }
