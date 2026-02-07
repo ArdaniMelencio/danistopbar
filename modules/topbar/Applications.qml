@@ -1,4 +1,5 @@
 import QtQuick.Controls
+import Quickshell.Hyprland
 import "../../config"
 
 
@@ -14,8 +15,7 @@ CButton {
     }
 
     onClicked: {
-        if (!isOpened)
-            console.log (isOpened)
+        if (!isOpened) Hyprland.dispatch("exec wofi --show drun")
     }
 
 }
