@@ -1,0 +1,14 @@
+pragma Singleton
+import Quickshell
+import QtQuick
+
+Singleton {
+
+    readonly property real fontSize : 10
+    readonly property real curve : 10
+    readonly property real margin : 5
+    readonly property real topMargin : 10
+
+    readonly property Themes theme : Themes {}
+
+}
