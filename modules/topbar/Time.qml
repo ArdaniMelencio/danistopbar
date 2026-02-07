@@ -34,12 +34,10 @@ CButton  {
         if (!isOpened){
             isOpened = true
             popup.panelY = 0
-            clock.visible = false
         }
         else {
             isOpened = false
             popup.panelY = -popup.height
-            clock.visible = true
         }
     }
 
