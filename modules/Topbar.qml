@@ -1,6 +1,7 @@
 import Quickshell
 import QtQuick
 import QtQuick.Controls
+import QtQuick.Effects
 import Qt5Compat.GraphicalEffects
 import "topbar"
 import "../config"
@@ -19,9 +20,12 @@ Scope {
             id: topBars
             screen: modelData
 
-            anchors.top: true
-            anchors.left: true
-            anchors.right: true
+
+            anchors {
+                left: true
+                top: true
+                right: true
+            }
 
             implicitHeight:40
             color: "transparent"
@@ -36,8 +40,9 @@ Scope {
 
             Rectangle {
                 id: ref
-                anchors.fill: parent
+
                 color: primary
+                anchors.fill: parent
 
                 Applications {
                     id: apps
@@ -45,9 +50,7 @@ Scope {
                     anchors.top: ref.top
                     anchors.bottom: ref.bottom
                     anchors.margins: Settings.margin
-
                     implicitWidth: parent.width/30
-
                 }
 
                 Workspaces {
@@ -56,7 +59,6 @@ Scope {
                     anchors.top: ref.top
                     anchors.bottom: ref.bottom
                     anchors.margins: Settings.margin
-
                     implicitWidth: parent.width/8
                 }
 
@@ -71,7 +73,6 @@ Scope {
                 Time {
                     id: time
                     anchors.centerIn: ref
-
                 }
 
                 Volume {
@@ -80,6 +81,24 @@ Scope {
                     anchors.top: ref.top
                     anchors.bottom: ref.bottom
                     anchors.margins: Settings.margin
+                }
+
+                Media {
+                    id: music
+                    anchors.right: tray.left
+                    anchors.top: ref.top
+                    anchors.bottom: ref.bottom
+                    anchors.margins: Settings.margin
+                    implicitWidth: parent.width/8
+                }
+
+                Systray {
+                    id: tray
+                    anchors.right: ref.right
+                    anchors.top: ref.top
+                    anchors.bottom: ref.bottom
+                    anchors.margins: Settings.margin
+                    implicitWidth: parent.width/30
                 }
             }
         }
