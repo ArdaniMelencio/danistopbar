@@ -8,16 +8,24 @@ Rectangle {
     property var result
 
     CText {
+        id: temp
         anchors.top: parent.top
         anchors.right: parent.right
         anchors.margins: Settings.margin
         anchors.rightMargin: Settings.margin*5
-        id: temp
         font.pixelSize: Settings.fontSize*5
 
-        text: result ? result.hourly.temperature_2m[0] + result.hourly_units.temperature_2m : "0.0C"
+        text: result ? result.hourly.temperature_2m[23] + result.hourly_units.temperature_2m : "0.0C"
 
         Component.onCompleted: callAPI()
+    }
+
+    CText {
+        anchors.top: temp.bottom
+        anchors.right: parent.right
+        anchors.margins: Settings.margin
+        anchors.rightMargin: Settings.margin*5
+        text: (result ? result.hourly.precipitation_probability[23] + result.hourly_units.precipitation_probability : "0%") + " chance of precipitation"
     }
 
     function callAPI(){
@@ -26,12 +34,13 @@ Rectangle {
             if (xmlReq.readyState === XMLHttpRequest.DONE) {
                 if (xmlReq.status === 200) {
                     result = JSON.parse(xmlReq.responseText)
+                    console.log(xmlReq.responseText)
                 } else {
                     console.log("Error: " + xmlReq.status);
                 }
             }
         }
-        xmlReq.open("GET","https://api.open-meteo.com/v1/forecast?latitude=13.4088&longitude=122.5615&hourly=temperature_2m,temperature_80m,precipitation&timezone=Asia%2FSingapore&forecast_days=1")
+        xmlReq.open("GET","https://api.open-meteo.com/v1/forecast?latitude=13.4088&longitude=122.5615&hourly=temperature_2m,weather_code,precipitation_probability&timezone=Asia%2FSingapore&forecast_days=1")
         xmlReq.send()
     }
 
