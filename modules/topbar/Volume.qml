@@ -1,10 +1,15 @@
 import QtQuick
 import QtQuick.Layouts
 import QtQuick.Controls
+import Quickshell.Hyprland
 import "../../config"
 
 CButton {
     implicitWidth: parent.width/6
+
+    onClicked: {
+    	Hyprland.dispatch("exec pavucontrol --tab=3")
+    }
 
     RowLayout {
         anchors.fill: parent
