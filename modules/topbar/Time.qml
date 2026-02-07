@@ -27,6 +27,10 @@ CButton  {
     }
 
     onClicked: {
+        showPanel()
+    }
+
+    function showPanel(){
         if (!isOpened){
             isOpened = true
             popup.panelY = 0
