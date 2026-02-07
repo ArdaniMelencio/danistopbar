@@ -73,13 +73,12 @@ PanelWindow{
                 }
             }
 
-            Rectangle {
+            WeatherAPI {
                 Layout.fillHeight: true
                 Layout.fillWidth: true
                 color: "transparent"
-
-                CText {text: "weather"}
             }
+
             Rectangle{
                 Layout.fillHeight: true
                 Layout.fillWidth: true

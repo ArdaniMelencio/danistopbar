@@ -53,7 +53,6 @@ CButton {
                 implicitWidth: parent.width
                 implicitHeight: parent.height
 
-                // Progress indicator for determinate state.
                 Rect {
                     width: Math.max(parent.height, cpuProg.visualPosition * parent.width)
                     height: parent.height
