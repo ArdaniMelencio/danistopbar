@@ -25,7 +25,7 @@ Rectangle {
         anchors.right: parent.right
         anchors.margins: Settings.margin
         anchors.rightMargin: Settings.margin*5
-        text: (result ? result.hourly.precipitation_probability[23] + result.hourly_units.precipitation_probability : "0%") + " chance of precipitation"
+        text: result ? result.hourly.precipitation_probability[23] + result.hourly_units.precipitation_probability : "0%"
     }
 
     function callAPI(){
