@@ -1,6 +1,7 @@
 import QtQuick
 import QtQuick.Layouts
 import QtQuick.Controls
+import Quickshell.Io
 import Quickshell.Hyprland
 import "../../config"
 
@@ -9,6 +10,30 @@ CButton {
 
     onClicked: {
     	Hyprland.dispatch("exec pavucontrol --tab=3")
+    }
+
+
+    function changeAudio(value, slider){
+        if (slider === "sink") Hyprland.dispatch("exec pactl set-sink-volume @DEFAULT_SINK@ " + value + "%")
+        else if (slider === "source") Hyprland.dispatch("exec pactl set-source-volume @DEFAULT_SOURCE@ " + value + "%")
+    }
+
+    Process {
+        id: getSinkValue
+        running:true
+        command: ["sh","-c","pactl get-sink-volume @DEFAULT_SINK@ | awk '{print $5}'"]
+        stdout: StdioCollector {
+            onStreamFinished: speaker.value = (this.text).split('%')[0]
+        }
+    }
+
+    Process {
+        id: getSourceValue
+        running:true
+        command: ["sh","-c","pactl get-source-volume @DEFAULT_SOURCE@ | awk '{print $5}'"]
+        stdout: StdioCollector {
+            onStreamFinished: mic.value = (this.text).split('%')[0]
+        }
     }
 
     RowLayout {
@@ -24,7 +49,10 @@ CButton {
 
             from: 153
             to: 0
-            value: 50
+
+            onValueChanged: {
+                changeAudio(value, "sink")
+            }
 
             background : Rect {
                 implicitWidth: speaker.visualPosition * parent.width
@@ -67,7 +95,10 @@ CButton {
 
             from: 153
             to: 0
-            value: 50
+
+            onValueChanged: {
+                changeAudio(value, "source")
+            }
 
             background : Rect {
                 implicitWidth: mic.visualPosition * parent.width
@@ -100,6 +131,5 @@ CButton {
                 color : "transparent"
             }
         }
-
     }
 }
