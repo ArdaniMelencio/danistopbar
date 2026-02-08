@@ -1,4 +1,4 @@
-# danistopbar
+# danistopbar (WIP)
 ### Description
 A quickshell config for myself, with plans on being usable for everyone
 
