@@ -57,7 +57,7 @@ CButton  {
         running: true
         command: ["sh",
                 "-c",
-                "TZ='UTC' date '+%H:%M:%S %Z'"]
+                "TZ='UTC' date '+%T %Z'"]
         stdout: StdioCollector {
             onStreamFinished: timeRoot.utc = this.text
         }
