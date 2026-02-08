@@ -51,7 +51,7 @@ Rectangle {
         xmlReq.onreadystatechange = function(){
             if (xmlReq.readyState=== XMLHttpRequest.DONE) {
                 if (xmlReq.status === 200 ) {ipLoc = JSON.parse(xmlReq.responseText) }
-                else console.log("Error: " + xmlReq.status)
+                else console.log("Error (IP): " + xmlReq.status)
             }
         }
         xmlReq.open("GET","http://ip-api.com/json/")
@@ -65,7 +65,7 @@ Rectangle {
                 if (xmlReq.status === 200) {
                     result = JSON.parse(xmlReq.responseText)
                 } else {
-                    console.log("Error: " + xmlReq.status);
+                    console.log("Error (WTR): " + xmlReq.status);
                 }
             }
         }

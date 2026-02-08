@@ -5,12 +5,24 @@ import Qt.labs.platform 1.1
 
 Scope {
 
+    property list<string> wallpaperList:
+        [
+            "toori.jpg",
+            "saka.jpg",
+            "cinna.jpg",
+            "sakamoto.jpg"
+        ]
+
+    property var currentWallpaper : wallpaperList[0]
+
     property string homeDir: StandardPaths.writableLocation(StandardPaths.HomeLocation)
-    property url defaultWallpaper: Qt.resolvedUrl("../assets/wallpapers/cinna.jpg")
+    property url defaultWallpaper: Qt.resolvedUrl("../assets/wallpapers/" + currentWallpaper)
 
     property url userWallpaper
 
     property string link: defaultWallpaper.toString().split(homeDir)[1]
+
+    onLinkChanged: wiat.running=true
 
     ColorQuantizer {
         id: themeColors
@@ -23,7 +35,7 @@ Scope {
     property list<color> colours: themeColors.colors
 
     Process {
-        running : true
+        id: changeWallpaper
         command: [
             "hyprctl",
             "hyprpaper",
@@ -33,5 +45,10 @@ Scope {
         ]
 
         Component.onCompleted: console.log(link)
+    }
+    Timer {
+        id: wiat
+        interval: 50
+        onTriggered: changeWallpaper.running=true
     }
 }
