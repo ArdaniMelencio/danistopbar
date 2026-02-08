@@ -75,7 +75,7 @@ Rectangle {
 
     Timer {
         id: apiCall
-        interval: 1000*60*5
+        interval: if (request) 1000*60*5; else 1000*60
         running:true
         repeat: true
         onTriggered: {
