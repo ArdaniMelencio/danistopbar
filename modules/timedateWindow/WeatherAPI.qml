@@ -77,7 +77,7 @@ Rectangle {
         running:true
         repeat: true
         onTriggered: {
-            callAPI()
+            callWeatherAPI()
         }
     }
 }
