@@ -35,7 +35,7 @@ Rect {
             implicitWidth: parent.width/3
 
             color: "transparent"
-            isDay: result.is_day ? true : false
+            isDay: result.current.is_day ? true : false
             wMO: result ? result.hourly.weather_code[23] : 0
         }
 
