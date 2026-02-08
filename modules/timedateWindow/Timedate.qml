@@ -85,7 +85,8 @@ PanelWindow{
                 Layout.fillWidth: true
                 Layout.margins: Settings.margin
                 Layout.columnSpan: 2
-                color: Qt.alpha(Settings.theme.colours[2], 0.7)
+
+                color: "transparent"
             }
         }
     }
