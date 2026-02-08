@@ -58,7 +58,7 @@ PanelWindow{
 
                 CText {
                     id: dateToday
-                    text: timeRoot.localTZ.split(".")[1].split(" <")[0]
+                    text: timeRoot.localTZ ? timeRoot.localTZ.split(".")[1].split(" <")[0] : "January 1, 2000"
                     anchors.top: parent.top
                     anchors.left: parent.left
                     font.pixelSize: Settings.fontSize*4
@@ -67,7 +67,7 @@ PanelWindow{
 
                 CText {
                     id: day
-                    text: " - " +timeRoot.localTZ.split(".")[0]
+                    text:  timeRoot.localTZ ?  " - " +timeRoot.localTZ.split(".")[0] : "Monday"
                     anchors.top: dateToday.bottom
                     anchors.left: parent.left
                     font.pixelSize: Settings.fontSize*3
