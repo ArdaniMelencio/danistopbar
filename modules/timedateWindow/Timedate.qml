@@ -48,33 +48,34 @@ PanelWindow{
             uniformCellHeights: true
             uniformCellWidths: true
 
-            Rect{
 
+            Rect{
                 Layout.fillWidth: true
                 Layout.fillHeight: true
                 Layout.leftMargin: Settings.margin
                 Layout.topMargin: Settings.margin
                 color: Qt.alpha(Settings.theme.colours[2],0.2)
+
                 CText {
-                    id: mainTime
+                    id: dateToday
+                    text: timeRoot.localTZ.split(".")[1].split(" <")[0]
                     anchors.top: parent.top
                     anchors.left: parent.left
-                    anchors.margins: Settings.margin
-                    anchors.leftMargin: Settings.margin*5
-
-                    text: timeRoot.localTZ.split('< ')[1]
-                    font.pixelSize: Settings.fontSize*5
+                    font.pixelSize: Settings.fontSize*4
+                    anchors.topMargin: Settings.margin+4
                 }
+
                 CText {
-                    anchors.top: mainTime.bottom
+                    id: day
+                    text: " - " +timeRoot.localTZ.split(".")[0]
+                    anchors.top: dateToday.bottom
                     anchors.left: parent.left
+                    font.pixelSize: Settings.fontSize*3
                     anchors.margins: Settings.margin
-                    anchors.leftMargin: Settings.margin*5
-
-                    text: timeRoot.utc
-                    font.pixelSize: Settings.fontSize*2
                 }
+
             }
+
 
             WeatherAPI {
                 Layout.fillHeight: true
@@ -84,17 +85,36 @@ PanelWindow{
                 color: Qt.alpha(Settings.theme.colours[2],0.2)
             }
 
+
             Rect{
                 Layout.fillHeight: true
                 Layout.fillWidth: true
                 Layout.margins: Settings.margin
                 Layout.topMargin: 0
                 Layout.columnSpan: 2
+
                 color: Qt.alpha(Settings.theme.colours[2],0.2)
+                CText {
+                    id: mainTime
+                    anchors.top: parent.top
+                    anchors.horizontalCenter: parent.horizontalCenter
+                    anchors.margins: Settings.margin
+                    anchors.leftMargin: Settings.margin*5
 
-                CText {text: timeRoot.localTZ.split(" <")[0]; anchors.centerIn: parent; font.pixelSize: Settings.fontSize*5}
+                    text: timeRoot.localTZ.split('< ')[1]
+                    font.pixelSize: Settings.fontSize*5
+                }
+                CText {
+                    anchors.top: mainTime.bottom
+                    anchors.horizontalCenter: parent.horizontalCenter
+                    anchors.margins: Settings.margin
+                    anchors.leftMargin: Settings.margin*5
 
+                    text: timeRoot.utc
+                    font.pixelSize: Settings.fontSize*2
+                }
             }
+
         }
     }
 }

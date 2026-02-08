@@ -45,7 +45,7 @@ CButton  {
         running: true
         command: ["sh",
                 "-c",
-                "date '+%a. %B %e, %+4Y < %T %Z'"]
+                "date '+%A. %B %e, %+4Y < %T %Z'"]
         stdout: StdioCollector {
             onStreamFinished: timeRoot.localTZ = this.text
         }
