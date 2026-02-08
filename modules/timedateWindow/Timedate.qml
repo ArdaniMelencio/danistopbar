@@ -79,15 +79,12 @@ PanelWindow{
                 color: "transparent"
             }
 
-            Rectangle{
+            Rect{
                 Layout.fillHeight: true
                 Layout.fillWidth: true
-                color: "transparent"
-            }
-            Rectangle{
-                Layout.fillHeight: true
-                Layout.fillWidth: true
-                color: "transparent"
+                Layout.margins: Settings.margin
+                Layout.columnSpan: 2
+                color: Qt.alpha(Settings.theme.colours[2], 0.7)
             }
         }
     }
