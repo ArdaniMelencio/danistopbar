@@ -1,4 +1,5 @@
 import QtQuick
+import QtQuick.Layouts
 import QtQuick.Controls
 import Quickshell.Io
 import "../../config"
@@ -7,25 +8,37 @@ Rectangle {
 
     property var result
 
-    CText {
-        id: temp
+    RowLayout {
+        id: topRef
+
         anchors.top: parent.top
         anchors.right: parent.right
         anchors.margins: Settings.margin
         anchors.rightMargin: Settings.margin*5
-        font.pixelSize: Settings.fontSize*5
 
-        text: result ? result.hourly.temperature_2m[23] + result.hourly_units.temperature_2m : "0.0C"
+        CText {
+            id: temp
+            font.pixelSize: result ? Settings.fontSize*5 : Settings.fontSize*2
 
-        Component.onCompleted: callAPI()
+            text: result ? result.hourly.temperature_2m[23] + result.hourly_units.temperature_2m : "Couldn't connect to API"
+
+            Component.onCompleted: callAPI()
+        }
+
+        Rect{
+            implicitHeight: parent.width/3
+            implicitWidth: parent.width/3
+
+            CText { anchors.centerIn: parent; text: "placeholder"; font.pixelSize: Settings.fontSize}
+        }
     }
 
     CText {
-        anchors.top: temp.bottom
+        anchors.top: topRef.bottom
         anchors.right: parent.right
         anchors.margins: Settings.margin
         anchors.rightMargin: Settings.margin*5
-        text: result ? result.hourly.precipitation_probability[23] + result.hourly_units.precipitation_probability : "0%"
+        text: result ? result.hourly.precipitation_probability[23] + result.hourly_units.precipitation_probability + " chance of rain": "..."
     }
 
     function callAPI(){
