@@ -39,7 +39,6 @@ CButton  {
         }
     }
 
-
     Process {
         id: localTZproc
 
