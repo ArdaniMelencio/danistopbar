@@ -26,7 +26,7 @@ CButton  {
         anchors.centerIn: parent
     }
 
-    onClicked: {
+    onHoveredChanged: {
         showPanel()
     }
 
