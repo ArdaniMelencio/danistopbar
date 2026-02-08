@@ -11,17 +11,12 @@ Rectangle {
 
     onIpLocChanged: if (ipLoc) callWeatherAPI()
 
-    RowLayout {
-        id: topRef
-
-        anchors.top: parent.top
-        anchors.right: parent.right
-        anchors.left: parent.left
-        anchors.rightMargin: Settings.margin*5
-
         CText {
             id: temp
             font.pixelSize: result ? Settings.fontSize*5 : Settings.fontSize*2
+            anchors.top:  parent.top
+            anchors.right: icon.left
+            anchors.margins: Settings.margin
 
             text: result ? result.hourly.temperature_2m[23] + result.hourly_units.temperature_2m : "Couldn't connect to API"
 
@@ -30,17 +25,24 @@ Rectangle {
 
 
         WMOIcon {
-            implicitHeight: parent.width/2
-            implicitWidth: parent.width/2
+            id: icon
+            anchors.top: parent.top
+            anchors.right: parent.right
+            anchors.margins: Settings.margin
+            anchors.rightMargin: Settings.margin*5
+
+            implicitHeight: parent.width/3
+            implicitWidth: parent.width/3
+
             color: "transparent"
             isDay: result.is_day ? true : false
             wMO: result ? result.hourly.weather_code[23] : 0
         }
 
-    }
+
 
     CText {
-        anchors.top: topRef.bottom
+        anchors.top: temp.bottom
         anchors.right: parent.right
         anchors.rightMargin: Settings.margin*5
         text: result ? result.hourly.precipitation_probability[23] + result.hourly_units.precipitation_probability + " chance of rain": "..."

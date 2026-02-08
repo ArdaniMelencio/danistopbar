@@ -50,8 +50,8 @@ PanelWindow{
 
             Rectangle {
 
-                Layout.fillHeight: true
                 Layout.fillWidth: true
+                Layout.fillHeight: true
                 color: "transparent"
                 CText {
                     id: mainTime
