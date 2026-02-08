@@ -22,7 +22,7 @@ CButton  {
     CText {
         id : clock
 
-        text: localTZ.split(':')[0]+":"+localTZ.split(':')[1]
+        text: localTZ.split('<')[1].split(':')[0]+":"+localTZ.split(':')[1]
         anchors.centerIn: parent
     }
 
@@ -45,7 +45,7 @@ CButton  {
         running: true
         command: ["sh",
                 "-c",
-                "date '+%T %Z'"]
+                "date '+%a. %B %e, %+4Y < %T %Z'"]
         stdout: StdioCollector {
             onStreamFinished: timeRoot.localTZ = this.text
         }

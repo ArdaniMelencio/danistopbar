@@ -60,7 +60,7 @@ PanelWindow{
                     anchors.margins: Settings.margin
                     anchors.leftMargin: Settings.margin*5
 
-                    text: timeRoot.localTZ
+                    text: timeRoot.localTZ.split('< ')[1]
                     font.pixelSize: Settings.fontSize*5
                 }
                 CText {
@@ -85,6 +85,8 @@ PanelWindow{
                 Layout.fillWidth: true
                 Layout.margins: Settings.margin
                 Layout.columnSpan: 2
+
+                CText {text: timeRoot.localTZ.split(" <")[0]; anchors.centerIn: parent; font.pixelSize: Settings.fontSize*5}
 
                 color: "transparent"
             }

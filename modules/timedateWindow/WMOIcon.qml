@@ -28,7 +28,7 @@ Rect {
         71: "Slight snow fall",
         73: "Moderate snow fall",
         77: "Snow grains",
-        80: "Slight rain showers",
+        80: "light-rain",
         81: "Moderate rain showers",
         82: "Violent rain showers",
         85: "Slight snow showers",
