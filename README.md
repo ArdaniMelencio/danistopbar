@@ -10,7 +10,7 @@ cd ~/.config/
 git clone https://github.com/ArdaniMelencio/danistopbar
 ```
 
-Then rename it as quickshell to get recognized by the [Quickshell](Quickshell.org) package using `mv ./danistopbar ./quickshell` or any file manager
+Then rename it as quickshell to get recognized by the [Quickshell](https://quickshell.org/) package using `mv ./danistopbar ./quickshell` or any file manager
 
 ### Dev-Release
 For latest dev packages ( might be broken ): [dev-tree](https://github.com/ArdaniMelencio/danistopbar/tree/dev)
