@@ -102,7 +102,7 @@ PanelWindow{
                     anchors.leftMargin: Settings.margin*5
 
                     text: timeRoot.localTZ.split('< ')[1]
-                    font.pixelSize: Settings.fontSize*5
+                    font.pixelSize: Settings.fontSize*7
                 }
                 CText {
                     anchors.top: mainTime.bottom
