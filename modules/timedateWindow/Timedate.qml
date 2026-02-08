@@ -48,11 +48,13 @@ PanelWindow{
             uniformCellHeights: true
             uniformCellWidths: true
 
-            Rectangle {
+            Rect{
 
                 Layout.fillWidth: true
                 Layout.fillHeight: true
-                color: "transparent"
+                Layout.leftMargin: Settings.margin
+                Layout.topMargin: Settings.margin
+                color: Qt.alpha(Settings.theme.colours[2],0.2)
                 CText {
                     id: mainTime
                     anchors.top: parent.top
@@ -77,18 +79,21 @@ PanelWindow{
             WeatherAPI {
                 Layout.fillHeight: true
                 Layout.fillWidth: true
-                color: "transparent"
+                Layout.rightMargin: Settings.margin
+                Layout.topMargin: Settings.margin
+                color: Qt.alpha(Settings.theme.colours[2],0.2)
             }
 
             Rect{
                 Layout.fillHeight: true
                 Layout.fillWidth: true
                 Layout.margins: Settings.margin
+                Layout.topMargin: 0
                 Layout.columnSpan: 2
+                color: Qt.alpha(Settings.theme.colours[2],0.2)
 
                 CText {text: timeRoot.localTZ.split(" <")[0]; anchors.centerIn: parent; font.pixelSize: Settings.fontSize*5}
 
-                color: "transparent"
             }
         }
     }

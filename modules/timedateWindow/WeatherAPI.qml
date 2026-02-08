@@ -4,7 +4,7 @@ import QtQuick.Controls
 import Quickshell.Io
 import "../../config"
 
-Rectangle {
+Rect {
 
     property var ipLoc
     property var result
