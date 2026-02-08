@@ -1,5 +1,8 @@
 # danistopbar
-A quickshell top bar for myself, with plans on being usable for everyone
+### Description
+A quickshell config for myself, with plans on being usable for everyone
+
+<img width="1600" height="900" alt="image" src="https://github.com/user-attachments/assets/746aeb1b-99f1-4db1-9736-c75ad02619f2" />
 
 ### Installation
 
