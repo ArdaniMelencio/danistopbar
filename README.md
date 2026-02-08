@@ -3,7 +3,7 @@ A quickshell top bar for myself, with plans on being usable for everyone
 
 ### Installation
 
-To install the config, clone this repo or its [dev version](https://github.com/ArdaniMelencio/danistopbar/edit/main/README.md#dev-release) to your .config/quickshell
+To install the config, clone this repo or its [dev version](https://github.com/ArdaniMelencio/danistopbar/tree/main?tab=readme-ov-file#dev-release) to your .config/quickshell
 
 ```
 cd ~/.config/
