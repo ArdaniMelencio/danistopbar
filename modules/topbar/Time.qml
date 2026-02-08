@@ -26,16 +26,17 @@ CButton  {
         anchors.centerIn: parent
     }
 
-    onHoveredChanged: {
-        showPanel()
-    }
+    onHoveredChanged:  if (hovered)showPanel(true)
 
-    function showPanel(){
-        if (!isOpened){
+
+    onClicked: showPanel(!isOpened)
+
+    function showPanel(willOpen){
+        if (willOpen){
             isOpened = true
             popup.panelY = 0
         }
-        else {
+        else if (!willOpen) {
             isOpened = false
             popup.panelY = -popup.height
         }

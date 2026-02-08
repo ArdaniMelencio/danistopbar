@@ -13,6 +13,7 @@ PanelWindow{
     property real panelY : -height
 
     exclusiveZone: 0
+    focusable: true
 
     color : "transparent"
 
