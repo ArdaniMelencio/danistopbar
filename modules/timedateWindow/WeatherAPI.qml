@@ -6,47 +6,69 @@ import "../../config"
 
 Rect {
 
+    Layout.fillHeight: true
+    Layout.fillWidth: true
+    Layout.rightMargin: Settings.margin
+    Layout.topMargin: Settings.margin
+    color: Qt.alpha(Settings.theme.colours[2],0.2)
+
     property var ipLoc
     property var result
 
     onIpLocChanged: if (ipLoc) {callWeatherAPI();apiCall.running=true}
 
+    Rectangle {
+        anchors.top:  parent.top
+        anchors.right: icon.left
+        implicitWidth: parent.width-(icon.width+Settings.margin*2)
+        implicitHeight: icon.height
+        anchors.topMargin: -Settings.margin
+
+        color: "transparent"
         CText {
             id: temp
+
+            anchors.top: parent.top
+            anchors.left: parent.left
+            anchors.leftMargin: Settings.margin
+            anchors.topMargin: 0
             font.pixelSize: result ? Settings.fontSize*5 : Settings.fontSize*2
-            anchors.top:  parent.top
-            anchors.right: icon.left
-            anchors.margins: Settings.margin
 
             text: result ? result.hourly.temperature_2m[23] + result.hourly_units.temperature_2m : "Couldn't connect to API"
-
             Component.onCompleted: callIpAPI()
         }
 
+        CText {
+            anchors.top: temp.bottom
+            anchors.left: parent.left
+            anchors.leftMargin: Settings.margin
 
-        WMOIcon {
-            id: icon
-            anchors.top: parent.top
-            anchors.right: parent.right
-            anchors.margins: Settings.margin
-            anchors.rightMargin: Settings.margin*5
+            font.pixelSize: Settings.fontSize*1.5
 
-            implicitHeight: parent.width/3
-            implicitWidth: parent.width/3
-
-            color: "transparent"
-            currentHour: popup.completeTime.split(":")[0]
-            wMO: result ? result.hourly.weather_code[23] : 0
+            text: result ? result.hourly.precipitation_probability[23] + result.hourly_units.precipitation_probability + " chance of rain": "..."
         }
-
-
-
-    CText {
-        anchors.top: temp.bottom
-        anchors.right: parent.right
-        anchors.rightMargin: Settings.margin*5
-        text: result ? result.hourly.precipitation_probability[23] + result.hourly_units.precipitation_probability + " chance of rain": "..."
     }
+
+
+
+    WMOIcon {
+        id: icon
+        anchors.top: parent.top
+        anchors.right: parent.right
+        anchors.margins: Settings.margin
+
+
+        implicitHeight: parent.width/3
+        implicitWidth: parent.width/3
+
+        border.color: Qt.alpha(Settings.theme.colours[2],0.2)
+        color: "transparent"
+        currentHour: popup.completeTime.split(":")[0]
+        wMO: result ? result.hourly.weather_code[23] : 0
+    }
+
+
+
 
     function callIpAPI(){
         var xmlReq = new XMLHttpRequest()
