@@ -55,61 +55,7 @@ PanelWindow{
             uniformCellWidths: true
 
 
-            Rect{
-                Layout.fillWidth: true
-                Layout.fillHeight: true
-                Layout.leftMargin: Settings.margin
-                Layout.topMargin: Settings.margin
-                color: Qt.alpha(Settings.theme.colours[2],0.2)
-
-                CText {
-                    id: dateToday
-                    text: timeRoot.localTZ ? (timeRoot.localTZ).split(".")[1].split(" <")[0] : "January 1, 2000"
-                    anchors.top: parent.top
-                    anchors.horizontalCenter: parent.horizontalCenter
-                    anchors.topMargin: Settings.margin+4
-                    height: Settings.fontSize*4
-                    font.pixelSize: Settings.fontSize*4
-                }
-
-                DayOfWeekRow {
-                    id: weekLayout
-                    anchors.top: dateToday.bottom
-                    anchors.left: parent.left
-                    anchors.right: parent.right
-                    anchors.leftMargin: Settings.margin
-                    anchors.rightMargin: Settings.margin
-                    implicitHeight: Settings.fontSize*1.5
-
-                    locale: Qt.locale("en_US")
-
-                    delegate: ColumnLayout{
-
-                        required property string shortName
-                        required property int day
-                        required property int index
-
-                        uniformCellSizes: true
-
-                        CText {
-                            text: shortName
-                            font.pixelSize: Settings.fontSize*1.5
-                            color: if (timeRoot.localTZ){
-                                if (shortName === dayOfWeek) Qt.darker(Settings.theme.colours[22],1.5)
-                                else Settings.theme.colours[22]
-                            }
-                        }
-                        CText {
-                            text: (today.getDate()-1) + index
-                            color: if (timeRoot.localTZ){
-                                if (shortName === dayOfWeek) Qt.darker(Settings.theme.colours[22],1.5)
-                                else Settings.theme.colours[22]
-                            }
-                        }
-
-                    }
-                }
-
+            DatePanel {
 
             }
 
