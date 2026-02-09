@@ -14,6 +14,8 @@ CButton  {
     property string localTZ
     property bool isOpened: false
 
+    property date currentDate : new Date()
+
     Timedate {
         id: popup
         implicitHeight: screen.height/3
@@ -22,7 +24,7 @@ CButton  {
     CText {
         id : clock
 
-        text: localTZ.split('<')[1].split(':')[0]+":"+localTZ.split(':')[1]
+        text: Qt.formatTime(currentDate, "hh:mm")
         anchors.centerIn: parent
     }
 

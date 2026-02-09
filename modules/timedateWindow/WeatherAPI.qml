@@ -77,7 +77,7 @@ Rect {
 
     Timer {
         id: apiCall
-        interval: request ? 1000*60*5 : 1000*60
+        interval: request ? 1000*60*5 : 1000*5
         repeat: true
         onTriggered: {
             callWeatherAPI()
