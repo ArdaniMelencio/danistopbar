@@ -163,7 +163,7 @@ Rect {
 
     Timer {
         id: apiCooldown
-        interval: 1000 * 60 * 60 * 24
+        interval: 1000 * 60 * 60 * 2
         onTriggered: {
             callWeatherAPI()
         }
