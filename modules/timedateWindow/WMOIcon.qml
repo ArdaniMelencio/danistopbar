@@ -4,7 +4,7 @@ import "../../config"
 Rect {
 
     property string wmoString
-    property bool isDay : true
+    property bool isDay
     property string endString
     property int wMO
     property var wmoGuide:
@@ -43,7 +43,6 @@ Rect {
     onIsDayChanged: {
         if (isDay) endString = "-day"
         else endString = "-night"
-
     }
 
     function displayIcon(value){ //temporarily show text instead of svg

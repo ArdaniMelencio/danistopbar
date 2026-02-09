@@ -9,7 +9,7 @@ Rect {
     property var ipLoc
     property var result
 
-    onIpLocChanged: if (ipLoc) callWeatherAPI()
+    onIpLocChanged: if (ipLoc) {callWeatherAPI();apiCall.running=true}
 
         CText {
             id: temp
@@ -35,7 +35,7 @@ Rect {
             implicitWidth: parent.width/3
 
             color: "transparent"
-            isDay: result.is_day ? true : false
+            isDay: result.current.is_day ? true : false
             wMO: result ? result.hourly.weather_code[23] : 0
         }
 
@@ -53,7 +53,7 @@ Rect {
         xmlReq.onreadystatechange = function(){
             if (xmlReq.readyState=== XMLHttpRequest.DONE) {
                 if (xmlReq.status === 200 ) {ipLoc = JSON.parse(xmlReq.responseText) }
-                else console.log("Error (IP): " + xmlReq.status)
+                else console.log("Error[IP]::Status " + xmlReq.status)
             }
         }
         xmlReq.open("GET","http://ip-api.com/json/")
@@ -67,7 +67,7 @@ Rect {
                 if (xmlReq.status === 200) {
                     result = JSON.parse(xmlReq.responseText)
                 } else {
-                    console.log("Error (WTR): " + xmlReq.status);
+                    console.log("Error[WTR]::Status "+xmlReq.status);
                 }
             }
         }
@@ -78,10 +78,17 @@ Rect {
     Timer {
         id: apiCall
         interval: request ? 1000*60*5 : 1000*60
-        running:true
         repeat: true
         onTriggered: {
             callWeatherAPI()
         }
+    }
+
+    Timer {
+        id: ipCall
+        interval: 1000*30
+        running: true
+        repeat: true
+        onTriggered: callIpAPI()
     }
 }

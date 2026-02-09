@@ -7,10 +7,13 @@ Scope {
 
     property list<string> wallpaperList:
         [
+            "spyfamily.png",
             "toori.jpg",
             "saka.jpg",
             "cinna.jpg",
-            "sakamoto.jpg"
+            "sakamoto.jpg",
+            "chisa.jpg",
+            "chisa2.jpg",
         ]
 
     property var currentWallpaper : wallpaperList[0]

@@ -1,5 +1,6 @@
 import QtQuick
 import QtQuick.Layouts
+import QtQuick.Controls
 import Quickshell
 import Quickshell.Hyprland
 import Quickshell.Wayland
@@ -58,20 +59,35 @@ PanelWindow{
 
                 CText {
                     id: dateToday
-                    text: timeRoot.localTZ.split(".")[1].split(" <")[0]
+                    text: timeRoot.localTZ ? (timeRoot.localTZ).split(".")[1].split(" <")[0] : "January 1, 2000"
                     anchors.top: parent.top
-                    anchors.left: parent.left
+                    anchors.horizontalCenter: parent.horizontalCenter
                     font.pixelSize: Settings.fontSize*4
                     anchors.topMargin: Settings.margin+4
                 }
 
-                CText {
-                    id: day
-                    text: " - " +timeRoot.localTZ.split(".")[0]
+                DayOfWeekRow {
                     anchors.top: dateToday.bottom
-                    anchors.left: parent.left
-                    font.pixelSize: Settings.fontSize*3
+                    anchors.horizontalCenter: parent.horizontalCenter
                     anchors.margins: Settings.margin
+
+                    delegate: ColumnLayout{
+
+                        required property string shortName
+                        required property string day
+
+                        uniformCellSizes: true
+                        spacing: Settings.margin
+
+                        CText {
+                            text: shortName
+                            color: if (timeRoot.localTZ){
+                                if (shortName === (timeRoot.localTZ).split(" ")[0]) Qt.darker(Settings.theme.colours[22],1.5)
+                                else Settings.theme.colours[22]
+                            }
+                        }
+
+                    }
                 }
 
             }
