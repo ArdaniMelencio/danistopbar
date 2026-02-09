@@ -3,8 +3,8 @@ import "../../config"
 
 Rect {
 
+    property string currentHour
     property string wmoString
-    property bool isDay
     property string endString
     property int wMO
     property var wmoGuide:
@@ -40,8 +40,9 @@ Rect {
 
     onWMOChanged: wmoString = displayIcon(wMO)
 
-    onIsDayChanged: {
-        if (isDay) endString = "-day"
+    onCurrentHourChanged: {
+        console.log(currentHour)
+        if (parseInt(currentHour)<18) endString = "-day"
         else endString = "-night"
     }
 
