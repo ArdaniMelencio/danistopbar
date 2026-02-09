@@ -84,7 +84,7 @@ PanelWindow{
                     anchors.margins: Settings.margin
                     anchors.leftMargin: Settings.margin*5
 
-                    text: completeTime
+                    text: Qt.formatDateTime(currentDate, "hh:mm:ss t")
                     font.pixelSize: Settings.fontSize*7
                 }
                 CText {
@@ -93,7 +93,7 @@ PanelWindow{
                     anchors.margins: Settings.margin
                     anchors.leftMargin: Settings.margin*5
 
-                    text: timeRoot.utc
+                    text: currentDate.getUTCHours() + ":" + currentDate.getUTCMinutes() + ":" + currentDate.getUTCSeconds() + " UTC"
                     font.pixelSize: Settings.fontSize*2
                 }
             }
