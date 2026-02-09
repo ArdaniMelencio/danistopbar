@@ -15,7 +15,9 @@ Rect {
     property var ipLoc
     property var result
 
-    onIpLocChanged: if (ipLoc) {callWeatherAPI();apiCall.running=true}
+    property bool canCallAPI :  true
+
+    onIpLocChanged: if (ipLoc && canCallAPI) {callWeatherAPI();canCallAPI=false}
 
     ColumnLayout {
         anchors.fill: parent
@@ -173,6 +175,7 @@ Rect {
         repeat: true
         onTriggered: {
             callWeatherAPI()
+            canCallAPI = true
         }
     }
 
