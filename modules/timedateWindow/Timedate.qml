@@ -73,8 +73,8 @@ PanelWindow{
 
                     delegate: ColumnLayout{
 
-                        required property var shortName
-                        required property var day
+                        required property string shortName
+                        required property string day
 
                         uniformCellSizes: true
                         spacing: Settings.margin
