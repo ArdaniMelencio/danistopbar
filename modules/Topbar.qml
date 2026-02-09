@@ -9,7 +9,6 @@ import "../config"
 Scope {
     id: mainBar
 
-
     property color primary : Qt.rgba(0.04,0.02,0.04,0.8)
 
     Variants {

@@ -11,15 +11,4 @@ Button {
         color: bgColor
         anchors.fill: parent
     }
-
-    onHoveredChanged: {
-        if (hovered && canChange) bgColor = Qt.darker(Settings.theme.colours[2],1.1)
-        else if (!hovered && canChange) bgColor = Settings.theme.colours[2]
-    }
-
-    onPressedChanged: {
-        if (pressed && canChange) bgColor = Qt.darker(Settings.theme.colours[2],1.3)
-        else if (!pressed && canChange) bgColor = Qt.darker(Settings.theme.colours[2],1.1)
-    }
-
 }
