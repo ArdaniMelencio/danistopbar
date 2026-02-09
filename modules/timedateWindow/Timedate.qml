@@ -55,18 +55,9 @@ PanelWindow{
             uniformCellWidths: true
 
 
-            DatePanel {
+            DatePanel { }
 
-            }
-
-
-            WeatherAPI {
-                Layout.fillHeight: true
-                Layout.fillWidth: true
-                Layout.rightMargin: Settings.margin
-                Layout.topMargin: Settings.margin
-                color: Qt.alpha(Settings.theme.colours[2],0.2)
-            }
+            WeatherAPI { }
 
 
             Rect{
