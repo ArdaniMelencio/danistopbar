@@ -9,7 +9,7 @@ Rect {
     property var ipLoc
     property var result
 
-    onIpLocChanged: if (ipLoc) callWeatherAPI()
+    onIpLocChanged: if (ipLoc) {callWeatherAPI();apiCall.running=true}
 
         CText {
             id: temp
@@ -78,10 +78,17 @@ Rect {
     Timer {
         id: apiCall
         interval: request ? 1000*60*5 : 1000*60
-        running:true
         repeat: true
         onTriggered: {
             callWeatherAPI()
         }
+    }
+
+    Timer {
+        id: ipCall
+        interval: 1000*30
+        running: true
+        repeat: true
+        onTriggered: callIpAPI()
     }
 }
