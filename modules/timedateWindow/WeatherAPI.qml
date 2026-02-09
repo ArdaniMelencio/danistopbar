@@ -35,7 +35,7 @@ Rect {
             implicitWidth: parent.width/3
 
             color: "transparent"
-            isDay: result.current.is_day ? true : false
+            currentHour: popup.completeTime.split(":")[0]
             wMO: result ? result.hourly.weather_code[23] : 0
         }
 

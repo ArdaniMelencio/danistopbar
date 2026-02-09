@@ -11,6 +11,11 @@ PanelWindow{
     anchors.top: parent.bottom
     implicitWidth: screen.width/3
 
+    property string dayOfWeek: (timeRoot.localTZ).split(" ")[0]
+    property string completeTime: timeRoot.localTZ.split('< ')[1]
+
+
+    property date today : new Date()
     property real panelY : -height
 
     exclusiveZone: 0
@@ -62,33 +67,49 @@ PanelWindow{
                     text: timeRoot.localTZ ? (timeRoot.localTZ).split(".")[1].split(" <")[0] : "January 1, 2000"
                     anchors.top: parent.top
                     anchors.horizontalCenter: parent.horizontalCenter
-                    font.pixelSize: Settings.fontSize*4
                     anchors.topMargin: Settings.margin+4
+                    height: Settings.fontSize*4
+                    font.pixelSize: Settings.fontSize*4
                 }
 
                 DayOfWeekRow {
+                    id: weekLayout
                     anchors.top: dateToday.bottom
-                    anchors.horizontalCenter: parent.horizontalCenter
-                    anchors.margins: Settings.margin
+                    anchors.left: parent.left
+                    anchors.right: parent.right
+                    anchors.leftMargin: Settings.margin
+                    anchors.rightMargin: Settings.margin
+                    implicitHeight: Settings.fontSize*1.5
+
+                    locale: Qt.locale("en_US")
 
                     delegate: ColumnLayout{
 
                         required property string shortName
-                        required property string day
+                        required property int day
+                        required property int index
 
                         uniformCellSizes: true
-                        spacing: Settings.margin
 
                         CText {
                             text: shortName
+                            font.pixelSize: Settings.fontSize*1.5
                             color: if (timeRoot.localTZ){
-                                if (shortName === (timeRoot.localTZ).split(" ")[0]) Qt.darker(Settings.theme.colours[22],1.5)
+                                if (shortName === dayOfWeek) Qt.darker(Settings.theme.colours[22],1.5)
+                                else Settings.theme.colours[22]
+                            }
+                        }
+                        CText {
+                            text: (today.getDate()-1) + index
+                            color: if (timeRoot.localTZ){
+                                if (shortName === dayOfWeek) Qt.darker(Settings.theme.colours[22],1.5)
                                 else Settings.theme.colours[22]
                             }
                         }
 
                     }
                 }
+
 
             }
 
@@ -117,7 +138,7 @@ PanelWindow{
                     anchors.margins: Settings.margin
                     anchors.leftMargin: Settings.margin*5
 
-                    text: timeRoot.localTZ.split('< ')[1]
+                    text: completeTime
                     font.pixelSize: Settings.fontSize*7
                 }
                 CText {
