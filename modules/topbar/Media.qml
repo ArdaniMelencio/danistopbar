@@ -23,11 +23,14 @@ Rect {
         Rect {
             Layout.fillHeight: true
             Layout.fillWidth: true
-            color:"red"
+            Layout.margins: Settings.margin
+            color: Qt.darker(Settings.theme.colours[2],1.2)
+            CText {anchors.fill: parent; text: "UI Placeholder"}
         }
         RowLayout {
             Layout.fillHeight: true
             Layout.fillWidth: true
+            Layout.margins: Settings.margin
 
             Button {
                 Layout.fillHeight: true
