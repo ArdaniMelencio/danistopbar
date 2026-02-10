@@ -109,7 +109,7 @@ Rect {
                         border.color: Qt.alpha(Settings.theme.colours[2],0.2)
                         color: "transparent"
                         currentHour: currentDate.getHours()
-                        wMO: result ? result.hourly.wewather_code[modelData] : 0
+                        wMO: result ? result.hourly.weather_code[modelData] : 0
                     }
 
                     CText {
