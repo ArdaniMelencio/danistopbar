@@ -75,6 +75,7 @@ PanelWindow{
                     anchors.margins: Settings.margin
                     anchors.leftMargin: Settings.margin*5
 
+                    font.family: Settings.fonts.time
                     text: Qt.formatDateTime(currentDate, "hh:mm:ss t")
                     font.pixelSize: Settings.fontSize*7
                 }
@@ -83,6 +84,7 @@ PanelWindow{
                     anchors.horizontalCenter: parent.horizontalCenter
                     anchors.margins: Settings.margin
                     anchors.leftMargin: Settings.margin*5
+                    font.family: Settings.fonts.time
 
                     text: currentDate.getUTCHours() + ":" + currentDate.getUTCMinutes() + ":" + currentDate.getUTCSeconds() + " UTC"
                     font.pixelSize: Settings.fontSize*2
