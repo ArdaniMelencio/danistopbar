@@ -41,8 +41,7 @@ Rect {
     onWMOChanged: wmoString = displayIcon(wMO)
 
     onCurrentHourChanged: {
-        console.log(currentHour)
-        if (parseInt(currentHour)<18) endString = "-day"
+        if (currentHour<18 && currentHour>4) endString = "-day"
         else endString = "-night"
     }
 
@@ -54,6 +53,6 @@ Rect {
         anchors.fill: parent
         smooth: true
         fillMode: Image.PreserveAspectFit
-        source: (wmoString && endString) ? Qt.resolvedUrl("../../assets/icons/weather/" + wmoString + endString + ".png") : Qt.resolvedUrl("../../assets/icons/weather/cloudy-day.png")
+        source: (wmoString) ? Qt.resolvedUrl("../../assets/icons/weather/" + wmoString + endString + ".png") : Qt.resolvedUrl("../../assets/icons/weather/cloudy" + endString + ".png")
     }
 }

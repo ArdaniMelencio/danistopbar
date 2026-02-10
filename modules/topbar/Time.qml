@@ -10,9 +10,9 @@ CButton  {
     implicitWidth: ref.width/20
     implicitHeight: ref.height-10
 
-    property string utc
-    property string localTZ
     property bool isOpened: false
+
+    property date currentDate : new Date()
 
     Timedate {
         id: popup
@@ -22,7 +22,7 @@ CButton  {
     CText {
         id : clock
 
-        text: localTZ.split('<')[1].split(':')[0]+":"+localTZ.split(':')[1]
+        text: Qt.formatTime(currentDate, "hh:mm")
         anchors.centerIn: parent
     }
 
@@ -39,34 +39,10 @@ CButton  {
         }
     }
 
-    Process {
-        id: localTZproc
-
-        running: true
-        command: ["sh",
-                "-c",
-                "date '+%a . %B %e, %+4Y < %T %Z'"]
-        stdout: StdioCollector {
-            onStreamFinished: timeRoot.localTZ = this.text
-        }
-    }
-
-    Process {
-        id: utcTZproc
-
-        running: true
-        command: ["sh",
-                "-c",
-                "TZ='UTC' date '+%T %Z'"]
-        stdout: StdioCollector {
-            onStreamFinished: timeRoot.utc = this.text
-        }
-    }
-
     Timer {
         interval: 1000
         running: true
         repeat: true
-        onTriggered: {localTZproc.running = true; utcTZproc.running = true}
+        onTriggered: {currentDate = new Date()}
     }
 }
