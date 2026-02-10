@@ -74,8 +74,9 @@ PanelWindow{
                     anchors.leftMargin: Settings.margin*5
 
                     font.family: Settings.fonts.time
+
                     text: Qt.formatDateTime(currentDate, "hh:mm:ss t")
-                    font.pixelSize: Settings.fontSize*7
+                    font.pixelSize: Settings.fontSize*6
                 }
                 CText {
                     anchors.top: mainTime.bottom
