@@ -57,7 +57,7 @@ Rect{
                 CText {
 
                     anchors.horizontalCenter: parent.horizontalCenter
-                    text: (today.getDate()-1) + index
+                    text: (currentDate.getDate() - currentDate.getDay()) + index
                     color: if (currentDate){
                         if (shortName === Qt.formatDate(currentDate, "ddd")) Qt.darker(Settings.theme.colours[22],1.5)
                         else Settings.theme.colours[22]

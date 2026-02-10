@@ -14,8 +14,6 @@ PanelWindow{
     property string dayOfWeek: (timeRoot.localTZ).split(" ")[0]
     property string completeTime: timeRoot.localTZ.split('< ')[1]
 
-
-    property date today : new Date()
     property real panelY : -height
 
     exclusiveZone: 0
@@ -86,7 +84,7 @@ PanelWindow{
                     anchors.leftMargin: Settings.margin*5
                     font.family: Settings.fonts.time
 
-                    text: currentDate.getUTCHours() + ":" + currentDate.getUTCMinutes() + ":" + currentDate.getUTCSeconds() + " UTC"
+                    text: currentDate.toUTCString().split(" ")[3] + " UTC"
                     font.pixelSize: Settings.fontSize*2
                 }
             }
