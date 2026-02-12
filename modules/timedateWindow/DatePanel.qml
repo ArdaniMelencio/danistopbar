@@ -8,7 +8,7 @@ Rect{
     Layout.fillHeight: true
     Layout.leftMargin: Settings.margin
     Layout.topMargin: Settings.margin
-    color: Qt.alpha(Settings.theme.colours[2],0.2)
+    color: Qt.alpha(Settings.primaryColor,0.2)
 
     ColumnLayout {
 
@@ -46,21 +46,20 @@ Rect{
                 uniformCellSizes: true
 
                 CText {
-                    anchors.horizontalCenter: parent.horizontalCenter
+                    Layout.alignment: Qt.AlignHCenter
                     text: shortName
                     font.pixelSize: Settings.fontSize*1.5
                     color: if (currentDate){
-                        if (shortName === Qt.formatDate(currentDate, "ddd")) Qt.darker(Settings.theme.colours[22],1.5)
-                        else Settings.theme.colours[22]
+                        if (shortName === Qt.formatDate(currentDate, "ddd")) Qt.darker(Settings.textColor,1.5)
+                        else Settings.textColor
                     }
                 }
                 CText {
-
-                    anchors.horizontalCenter: parent.horizontalCenter
+                    Layout.alignment: Qt.AlignHCenter
                     text: (currentDate.getDate() - currentDate.getDay()) + index
                     color: if (currentDate){
-                        if (shortName === Qt.formatDate(currentDate, "ddd")) Qt.darker(Settings.theme.colours[22],1.5)
-                        else Settings.theme.colours[22]
+                        if (shortName === Qt.formatDate(currentDate, "ddd")) Qt.darker(Settings.textColor,1.5)
+                        else Settings.textColor
                     }
                 }
 

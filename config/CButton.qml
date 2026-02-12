@@ -3,7 +3,7 @@ import QtQuick
 
 Button {
 
-    property color bgColor : Settings.theme.colours[2]
+    property color bgColor : Settings?.theme ? Settings.primaryColor : "white"
     property bool canChange : true
 
     background : Rect {

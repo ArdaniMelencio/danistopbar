@@ -46,7 +46,7 @@ CButton {
             background : Rect {
                 implicitWidth: cpuProg.visualPosition * parent.width
                 implicitHeight: parent.height
-                color: mainBar.primary
+                color: Settings.sliderBgColor
             }
 
             contentItem: Item {
@@ -56,7 +56,7 @@ CButton {
                 Rect {
                     width: Math.max(parent.height, cpuProg.visualPosition * parent.width)
                     height: parent.height
-                    color: Qt.darker(Settings.theme.colours[22],1.2)
+                    color: Settings.sliderColor
                 }
             }
 
@@ -80,7 +80,7 @@ CButton {
             background : Rect {
                 implicitWidth: ramProg.visualPosition * parent.width
                 implicitHeight: parent.height
-                color: mainBar.primary
+                color: Settings.sliderBgColor
             }
 
             contentItem: Item {
@@ -91,7 +91,7 @@ CButton {
                 Rect {
                     width: Math.max(parent.height, ramProg.visualPosition * parent.width)
                     height: parent.height
-                    color: Qt.darker(Settings.theme.colours[22],1.2)
+                    color: Settings.sliderColor
                 }
             }
 

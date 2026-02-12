@@ -12,7 +12,7 @@ Scope {
 
     property string homeDir: StandardPaths.writableLocation(StandardPaths.HomeLocation)
     property var currentWallpaper : wallpaperList[0]
-    property url defaultWallpaper: Qt.resolvedUrl("../assets/wallpapers/" + currentWallpaper)
+    property url defaultWallpaper: currentWallpaper ? Qt.resolvedUrl("../assets/wallpapers/" + currentWallpaper) : Qt.resolvedUrl("../assets/wallpapers/1.jpg")
     property string link: ".config/quickshell/assets/wallpapers/" + currentWallpaper //used by hyprctl
 
     onLinkChanged: wait.running=true
@@ -35,8 +35,8 @@ Scope {
         id: themeColors
 
         source: defaultWallpaper
-        depth: 5
-        rescaleSize: 32
+        depth: 3
+        rescaleSize: 10
     }
 
     property list<color> colours: themeColors.colors

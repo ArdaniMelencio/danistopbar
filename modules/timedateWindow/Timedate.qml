@@ -12,9 +12,6 @@ PanelWindow{
     anchors.top: parent.bottom
     implicitWidth: screen.width/3
 
-    property string dayOfWeek: (timeRoot.localTZ).split(" ")[0]
-    property string completeTime: timeRoot.localTZ.split('< ')[1]
-
     property real panelY : -height
 
     exclusiveZone: 0
@@ -32,8 +29,6 @@ PanelWindow{
     onPanelYChanged: {
         if (panelY === -height) popup.WlrLayershell.layer = WlrLayer.Bottom
         else  popup.WlrLayershell.layer = WlrLayer.Overlay
-
-        //console.log(Settings.curve * ((popup.height+panelY)/popup.height))
     }
 
     Shape {
@@ -96,7 +91,6 @@ PanelWindow{
 
             WeatherAPI { }
 
-
             Rect{
                 Layout.fillHeight: true
                 Layout.fillWidth: true
@@ -104,7 +98,8 @@ PanelWindow{
                 Layout.topMargin: 0
                 Layout.columnSpan: 2
 
-                color: Qt.alpha(Settings.theme.colours[2],0.2)
+                color: Qt.alpha(Settings.primaryColor,0.2)
+
                 CText {
                     id: mainTime
                     anchors.top: parent.top
