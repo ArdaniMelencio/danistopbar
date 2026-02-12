@@ -16,7 +16,7 @@ CButton  {
 
     Timedate {
         id: popup
-        implicitHeight: screen.height/3
+        implicitHeight: screen.height/3+(2*Settings.curve)
     }
 
     CText {
