@@ -1,4 +1,5 @@
 import QtQuick
+import QtQuick.Shapes
 import QtQuick.Layouts
 import QtQuick.Controls
 import Quickshell
@@ -19,8 +20,7 @@ PanelWindow{
     exclusiveZone: 0
     focusable: true
 
-    color : "transparent"
-
+    color: "transparent"
     Behavior on panelY {
         NumberAnimation {
             duration:200
@@ -32,13 +32,52 @@ PanelWindow{
     onPanelYChanged: {
         if (panelY === -height) popup.WlrLayershell.layer = WlrLayer.Bottom
         else  popup.WlrLayershell.layer = WlrLayer.Overlay
+
+        //console.log(Settings.curve * ((popup.height+panelY)/popup.height))
+    }
+
+    Shape {
+        id: shapeRef
+        height: parent.height
+        width: parent.width
+        layer.samples: 4
+        layer.enabled: true
+        //y: panelY
+        ShapePath {
+            id: path
+
+            fillColor: mainBar.primary
+            strokeWidth: 0
+            startX: 0; startY: -1
+
+            property real shapeCurve: Settings.curve * ((popup.height+panelY)/popup.height)
+
+            PathArc { x: Settings.curve; y: (popup.height+panelY)>(Settings.curve*2) ? path.shapeCurve : 0
+                radiusX: path.shapeCurve; radiusY: Settings.curve
+            }
+            PathLine { x: Settings.curve; y: (height+panelY)-Settings.curve}
+            PathArc { x: Settings.curve*2; y: (height+panelY)
+                radiusX: Settings.curve; radiusY: Settings.curve
+                direction: PathArc.Counterclockwise
+            }
+            PathLine { x: width-Settings.curve*2; y: (height+panelY)}
+            PathArc { x: width-Settings.curve; y: (height+panelY)-Settings.curve
+                radiusX: Settings.curve; radiusY: Settings.curve
+                direction: PathArc.Counterclockwise
+            }
+            PathLine { x: width-Settings.curve; y: (popup.height+panelY)>(Settings.curve*2) ? path.shapeCurve : 0}
+            PathArc { x: width; y: 0
+                radiusX: path.shapeCurve; radiusY: Settings.curve
+            }
+        }
     }
 
     Rect {
         id: ext
-        color: mainBar.primary
+        color: 'transparent'
         implicitHeight: parent.height
-        implicitWidth: parent.width
+        implicitWidth: parent.width-(2*Settings.curve)
+        anchors.horizontalCenter: shapeRef.horizontalCenter
         topRightRadius: 0
         topLeftRadius: 0
 
