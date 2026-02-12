@@ -1,20 +1,29 @@
 import Quickshell
 import Quickshell.Io
 import QtQuick
+import Qt.labs.folderlistmodel
 import Qt.labs.platform 1.1
 
 Scope {
 
-    property list<string> wallpaperList:
-        [
-            "spyfamily.png",
-            "toori.jpg",
-            "saka.jpg",
-            "cinna.jpg",
-            "sakamoto.jpg",
-            "chisa.jpg",
-            "chisa2.jpg",
-        ]
+    property bool loaded : false
+
+    property list<string> wallpaperList
+
+    FolderListModel {
+        id: wallpaperFolder
+        folder: Qt.resolvedUrl("../assets/wallpapers/")
+        nameFilters: ["*.jpg","*.png"]
+
+        onStatusChanged: if(status===FolderListModel.Ready) {
+                             //console.log (wallpaperFolder.get(0, "fileName") + " = " + wallpaperList[0])
+                             loaded = true
+                             for (var i = 0; i < wallpaperFolder.count; i++ ){
+                                 wallpaperList[i] = wallpaperFolder.get(i, "fileName")
+                                 console.log(wallpaperFolder.get(i, "fileName"))
+                             }
+                         }
+    }
 
     property var currentWallpaper : wallpaperList[0]
 
@@ -23,7 +32,7 @@ Scope {
 
     property url userWallpaper
 
-    property string link: defaultWallpaper.toString().split(homeDir)[1]
+    property string link: ".config/quickshell/assets/wallpapers/" + currentWallpaper //used by hyprctl
 
     onLinkChanged: wait.running=true
 
@@ -47,7 +56,7 @@ Scope {
             "~"+link
         ]
 
-        Component.onCompleted: console.log(link)
+
     }
     Timer {
         id: wait
