@@ -1,31 +1,35 @@
 import Quickshell
 import Quickshell.Io
 import QtQuick
+import Qt.labs.folderlistmodel
 import Qt.labs.platform 1.1
 
 Scope {
 
-    property list<string> wallpaperList:
-        [
-            "spyfamily.png",
-            "toori.jpg",
-            "saka.jpg",
-            "cinna.jpg",
-            "sakamoto.jpg",
-            "chisa.jpg",
-            "chisa2.jpg",
-        ]
+    property bool loaded : false
 
-    property var currentWallpaper : wallpaperList[0]
+    property list<string> wallpaperList
 
     property string homeDir: StandardPaths.writableLocation(StandardPaths.HomeLocation)
+    property var currentWallpaper : wallpaperList[0]
     property url defaultWallpaper: Qt.resolvedUrl("../assets/wallpapers/" + currentWallpaper)
+    property string link: ".config/quickshell/assets/wallpapers/" + currentWallpaper //used by hyprctl
 
-    property url userWallpaper
+    onLinkChanged: wait.running=true
 
-    property string link: defaultWallpaper.toString().split(homeDir)[1]
+    FolderListModel {
+        id: wallpaperFolder
+        folder: Qt.resolvedUrl("../assets/wallpapers/")
+        nameFilters: ["*.jpg","*.png"]
 
-    onLinkChanged: wiat.running=true
+        onStatusChanged: if(status===FolderListModel.Ready) {
+                             console.log("Successfully read folder")
+                             loaded = true
+                             for (var i = 0; i < wallpaperFolder.count; i++ ){
+                                 wallpaperList[i] = wallpaperFolder.get(i, "fileName")
+                             }
+                         }
+    }
 
     ColorQuantizer {
         id: themeColors
@@ -46,11 +50,10 @@ Scope {
             ",",
             "~"+link
         ]
-
-        Component.onCompleted: console.log(link)
     }
+
     Timer {
-        id: wiat
+        id: wait
         interval: 50
         onTriggered: changeWallpaper.running=true
     }
