@@ -10,31 +10,26 @@ Scope {
 
     property list<string> wallpaperList
 
+    property string homeDir: StandardPaths.writableLocation(StandardPaths.HomeLocation)
+    property var currentWallpaper : wallpaperList[0]
+    property url defaultWallpaper: Qt.resolvedUrl("../assets/wallpapers/" + currentWallpaper)
+    property string link: ".config/quickshell/assets/wallpapers/" + currentWallpaper //used by hyprctl
+
+    onLinkChanged: wait.running=true
+
     FolderListModel {
         id: wallpaperFolder
         folder: Qt.resolvedUrl("../assets/wallpapers/")
         nameFilters: ["*.jpg","*.png"]
 
         onStatusChanged: if(status===FolderListModel.Ready) {
-                             //console.log (wallpaperFolder.get(0, "fileName") + " = " + wallpaperList[0])
+                             console.log("Successfully read folder")
                              loaded = true
                              for (var i = 0; i < wallpaperFolder.count; i++ ){
                                  wallpaperList[i] = wallpaperFolder.get(i, "fileName")
-                                 console.log(wallpaperFolder.get(i, "fileName"))
                              }
                          }
     }
-
-    property var currentWallpaper : wallpaperList[0]
-
-    property string homeDir: StandardPaths.writableLocation(StandardPaths.HomeLocation)
-    property url defaultWallpaper: Qt.resolvedUrl("../assets/wallpapers/" + currentWallpaper)
-
-    property url userWallpaper
-
-    property string link: ".config/quickshell/assets/wallpapers/" + currentWallpaper //used by hyprctl
-
-    onLinkChanged: wait.running=true
 
     ColorQuantizer {
         id: themeColors
@@ -55,9 +50,8 @@ Scope {
             ",",
             "~"+link
         ]
-
-
     }
+
     Timer {
         id: wait
         interval: 50
