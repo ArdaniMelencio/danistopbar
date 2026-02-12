@@ -94,18 +94,24 @@ Rect {
                      ]
 
 
-                ColumnLayout {
+                Rect {
                     required property int modelData
 
                     Layout.fillHeight: true
                     Layout.fillWidth: true
                     Layout.margins: Settings.margin
 
-                    WMOIcon {
+                    color: "transparent"
 
-                        Layout.alignment: Qt.AlignCenter
+                    WMOIcon {
+                        id: weatherIcon
+
+                        anchors.top: parent.top
+                        anchors.horizontalCenter: parent.horizontalCenter
+
                         implicitHeight: parent.height/1.5
                         implicitWidth: parent.height/1.5
+
                         border.color: Qt.alpha(Settings.theme.colours[2],0.2)
                         color: "transparent"
                         currentHour: currentDate.getHours()
@@ -113,7 +119,10 @@ Rect {
                     }
 
                     CText {
-                        Layout.alignment: Qt.AlignCenter
+
+                        anchors.top: weatherIcon.bottom
+                        anchors.horizontalCenter: parent.horizontalCenter
+
                         font.pixelSize: Settings.fontSize
                         text: result ? result.hourly.temperature_2m[modelData] + result.hourly_units.temperature_2m: "-173°C"
                     }
