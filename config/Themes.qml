@@ -25,7 +25,7 @@ Scope {
 
     property string link: defaultWallpaper.toString().split(homeDir)[1]
 
-    onLinkChanged: wiat.running=true
+    onLinkChanged: wait.running=true
 
     ColorQuantizer {
         id: themeColors
@@ -50,7 +50,7 @@ Scope {
         Component.onCompleted: console.log(link)
     }
     Timer {
-        id: wiat
+        id: wait
         interval: 50
         onTriggered: changeWallpaper.running=true
     }
