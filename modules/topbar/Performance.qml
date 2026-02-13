@@ -34,7 +34,7 @@ CButton {
         anchors.margins: Settings.margin
         spacing: 5
 
-        ProgressBar {
+        Slider {
 
             id: cpuProg
             implicitHeight: parent.height - Settings.margin
@@ -66,9 +66,12 @@ CButton {
                 text : "CPU"
                 font.pixelSize: Settings.fontSize
             }
+
+            handle: Rectangle { color: "transparent" }
+            enabled: false
         }
 
-        ProgressBar {
+        Slider {
 
             id: ramProg
             implicitHeight: parent.height - Settings.margin
@@ -100,6 +103,9 @@ CButton {
 
                 text : "RAM"
                 font.pixelSize: Settings.fontSize}
+
+            handle: Rectangle { color: "transparent" }
+            enabled: false
         }
     }
 
