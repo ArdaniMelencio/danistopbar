@@ -11,7 +11,7 @@ Scope {
     property list<string> wallpaperList
 
     property string homeDir: StandardPaths.writableLocation(StandardPaths.HomeLocation)
-    property var currentWallpaper : wallpaperList[0]
+    property var currentWallpaper
     property url defaultWallpaper: currentWallpaper ? Qt.resolvedUrl("../assets/wallpapers/" + currentWallpaper) : Qt.resolvedUrl("../assets/wallpapers/1.jpg")
     property string link: ".config/quickshell/assets/wallpapers/" + currentWallpaper //used by hyprctl
 
@@ -37,6 +37,10 @@ Scope {
         source: defaultWallpaper
         depth: 3
         rescaleSize: 10
+    }
+
+    function changeWallpaper(index){
+        currentWallpaper = wallpaperList[index]
     }
 
     property list<color> colours: themeColors.colors
