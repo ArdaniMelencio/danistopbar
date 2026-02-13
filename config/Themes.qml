@@ -6,6 +6,8 @@ import Qt.labs.platform 1.1
 
 Scope {
 
+    property var config : JSON.parse(File.read("config.json"))
+
     property bool loaded : false
 
     property list<string> wallpaperList
