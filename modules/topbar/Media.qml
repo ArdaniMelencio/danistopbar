@@ -23,7 +23,7 @@ Rect {
             Layout.fillHeight: true
             Layout.fillWidth: true
             Layout.margins: Settings.margin
-            color: Qt.darker(Settings.theme.colours[2],1.2)
+            color: Settings.sliderBgColor
             CText {anchors.fill: parent; text: "UI Placeholder"}
         }
         RowLayout {
@@ -45,7 +45,7 @@ Rect {
                     Rectangle {
                         id: prev
                         anchors.fill: parent
-                        color : Settings.textColor
+                        color : Settings.sliderBgColor
                         layer.enabled: true
                         layer.effect: OpacityMask {
                             maskSource: parent
@@ -67,7 +67,7 @@ Rect {
                     Rectangle {
                         id: pausePlay
                         anchors.fill: parent
-                        color : Settings.textColor
+                        color : Settings.sliderBgColor
                         layer.enabled: true
                         layer.effect: OpacityMask {
                             maskSource: parent
@@ -89,7 +89,7 @@ Rect {
                     Rectangle {
                         id: next
                         anchors.fill: parent
-                        color : Settings.textColor
+                        color : Settings.sliderBgColor
                         layer.enabled: true
                         layer.effect: OpacityMask {
                             maskSource: parent
