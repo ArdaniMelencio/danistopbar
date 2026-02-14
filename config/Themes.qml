@@ -17,6 +17,7 @@ Scope {
     property url defaultWallpaper: currentWallpaper ? Qt.resolvedUrl("../assets/wallpapers/" + currentWallpaper) : Qt.resolvedUrl("../assets/wallpapers/1.jpg")
     property string link: ".config/quickshell/assets/wallpapers/" + currentWallpaper //used by hyprctl
 
+    onWallpaperListChanged: if (wallpaperList) currentWallpaper = wallpaperList[0]
     onLinkChanged: wait.running=true
 
     FolderListModel {
