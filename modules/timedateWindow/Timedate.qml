@@ -45,7 +45,7 @@ PanelWindow{
             strokeWidth: 0
             startX: 0; startY: -1
 
-            property real shapeCurve: Settings.curve * ((popup.height+panelY)/popup.height)
+            property real shapeCurve: Settings.curve
 
             PathArc { x: Settings.curve; y: (popup.height+panelY)>(Settings.curve*2) ? path.shapeCurve : 0
                 radiusX: path.shapeCurve; radiusY: Settings.curve
