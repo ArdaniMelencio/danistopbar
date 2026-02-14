@@ -43,20 +43,32 @@ Rect {
                     anchors.left: parent.left
                     anchors.leftMargin: Settings.margin
                     anchors.topMargin: result ? 0 : Settings.margin*2
-                    font.pixelSize: result ? Settings.fontSize*5 : Settings.fontSize*2
+                    font.pixelSize: result ? Settings.fontSize.huge * (parent.height/50): Settings.fontSize.regular
 
                     text: result ? result.hourly.temperature_2m[23] + result.hourly_units.temperature_2m : "Couldn't connect to API"
                     Component.onCompleted: callIpAPI()
                 }
 
                 CText {
+                    id: probability
                     anchors.top: temp.bottom
                     anchors.left: parent.left
                     anchors.leftMargin: Settings.margin
 
-                    font.pixelSize: Settings.fontSize*1.5
+                    font.pixelSize: Settings.fontSize.regular * (parent.height/75)
 
                     text: result ? result.hourly.precipitation_probability[23] + result.hourly_units.precipitation_probability + " chance of rain": "..."
+                }
+
+                CText {
+                    id: loc
+                    anchors.top: probability.bottom
+                    anchors.left: parent.left
+                    anchors.leftMargin: Settings.margin
+
+                    font.pixelSize: Settings.fontSize.regular * (parent.height/75)
+
+                    text: ipLoc ? ipLoc.country + "/" + ipLoc.city : ""
                 }
             }
 
@@ -123,7 +135,7 @@ Rect {
                         anchors.top: weatherIcon.bottom
                         anchors.horizontalCenter: parent.horizontalCenter
 
-                        font.pixelSize: Settings.fontSize
+                        font.pixelSize: Settings.fontSize.large * (parent.height/75)
                         text: result ? result.hourly.temperature_2m[modelData] + result.hourly_units.temperature_2m: "-173°C"
                     }
 

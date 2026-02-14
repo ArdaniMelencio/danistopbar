@@ -64,7 +64,7 @@ CButton {
                 anchors.centerIn: parent
 
                 text : "CPU"
-                font.pixelSize: Settings.fontSize
+                font.pixelSize: Settings.fontSize.regular
             }
 
             handle: Rectangle { color: "transparent" }
@@ -102,7 +102,7 @@ CButton {
                 anchors.centerIn: parent
 
                 text : "RAM"
-                font.pixelSize: Settings.fontSize}
+                font.pixelSize: Settings.fontSize.regular}
 
             handle: Rectangle { color: "transparent" }
             enabled: false

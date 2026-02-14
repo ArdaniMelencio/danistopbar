@@ -5,7 +5,7 @@ import QtQuick
 
 Singleton {
 
-    readonly property real fontSize : 10
+    readonly property FontSizes fontSize: FontSizes {}
     readonly property real curve : 10
     readonly property real margin : 5
     readonly property real topMargin : 10
@@ -14,7 +14,14 @@ Singleton {
     component Fonts: JsonObject {
         property string regular: "RF Rufo"
         property string time: "Fira Mono"
+    }
 
+    component FontSizes: JsonObject {
+        readonly property int small: 5
+        readonly property int regular: 10
+        readonly property int large: 15
+        readonly property int xLarge: 20
+        readonly property int huge: 35
     }
 
     readonly property Themes theme : Themes{}

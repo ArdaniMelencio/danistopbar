@@ -77,7 +77,7 @@ CButton {
                 anchors.centerIn: parent
 
                 text : "SPEAKER"
-                font.pixelSize: Settings.fontSize
+                font.pixelSize: Settings.fontSize.regular
             }
 
 
@@ -123,7 +123,7 @@ CButton {
                 anchors.centerIn: parent
 
                 text : "MIC"
-                font.pixelSize: Settings.fontSize
+                font.pixelSize: Settings.fontSize.regular
             }
 
 

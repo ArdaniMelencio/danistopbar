@@ -110,7 +110,7 @@ PanelWindow{
                     font.family: Settings.fonts.time
 
                     text: Qt.formatDateTime(currentDate, "hh:mm:ss t")
-                    font.pixelSize: Settings.fontSize*6
+                    font.pixelSize: Settings.fontSize.huge*(parent.height/100)
                 }
                 CText {
                     anchors.top: mainTime.bottom
@@ -120,7 +120,7 @@ PanelWindow{
                     font.family: Settings.fonts.time
 
                     text: currentDate.toUTCString().split(" ")[3] + " UTC"
-                    font.pixelSize: Settings.fontSize*2
+                    font.pixelSize: Settings.fontSize.large
                 }
             }
 

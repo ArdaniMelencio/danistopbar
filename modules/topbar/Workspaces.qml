@@ -29,7 +29,7 @@ Rect {
                            else if (!modelData.active) Qt.darker(Settings.primaryColor, 1.2)
                 }
 
-                CText { text : (modelData.id); anchors.centerIn: parent; font.pixelSize: Settings.fontSize*1.2}
+                CText { text : (modelData.id); anchors.centerIn: parent; font.pixelSize: Settings.fontSize.regular}
 
                 onClicked: Hyprland.dispatch("workspace "+modelData.id)
             }

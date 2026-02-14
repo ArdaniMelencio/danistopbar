@@ -23,6 +23,7 @@ CButton  {
         id : clock
 
         text: Qt.formatTime(currentDate, "hh:mm")
+        font.pixelSize: Settings.fontSize.large
         anchors.centerIn: parent
     }
 
