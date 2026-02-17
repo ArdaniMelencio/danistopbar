@@ -98,7 +98,6 @@ PanelWindow{
                 Layout.topMargin: 0
                 Layout.columnSpan: 2
 
-                color: Qt.alpha(Settings.primaryColor,0.2)
 
                 CText {
                     id: mainTime

@@ -9,7 +9,6 @@ Rect{
     Layout.fillHeight: true
     Layout.leftMargin: Settings.margin
     Layout.topMargin: Settings.margin
-    color: Qt.alpha(Settings.primaryColor,0.2)
 
     ColumnLayout {
 

@@ -9,7 +9,7 @@ import "../config"
 Scope {
     id: mainBar
 
-    property color primary : Qt.rgba(0.02,0.02,0.02, 0.7)
+    property color primary : Settings.primaryColor//Qt.rgba(0.02,0.02,0.02, 0.7)
 
     Variants {
         model: Quickshell.screens

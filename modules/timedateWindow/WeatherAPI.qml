@@ -10,7 +10,6 @@ Rect {
     Layout.fillWidth: true
     Layout.rightMargin: Settings.margin
     Layout.topMargin: Settings.margin
-    color: Qt.alpha(Settings.primaryColor,0.2)
 
     property var ipLoc
     property var result
