@@ -1,4 +1,5 @@
 import Quickshell
+import Quickshell.Wayland
 import QtQuick
 import QtQuick.Controls
 import QtQuick.Effects
@@ -10,6 +11,7 @@ Scope {
     id: mainBar
 
     property color primary : Settings.primaryColor//Qt.rgba(0.02,0.02,0.02, 0.7)
+    property bool isHovered: false
 
     Variants {
         model: Quickshell.screens
@@ -20,6 +22,17 @@ Scope {
             id: topBars
             screen: modelData
 
+            WlrLayershell.layer: WlrLayer.Top
+            exclusiveZone: ref.height
+
+            HoverHandler {
+                onHoveredChanged: {
+                    if (hovered) {
+                        isHovered = true
+                    }
+                    else isHovered = false
+                }
+            }
 
             anchors {
                 left: true
@@ -38,11 +51,25 @@ Scope {
                 }
             }
 
+            DropShadow {
+                radius: 5
+                samples: 11
+                color: "black"
+
+                source: ref
+                anchors.fill: parent
+
+                //WlrLayershell.layer: WlrLayer.Bottom
+            }
+
             Rectangle {
                 id: ref
 
                 color: primary
-                anchors.fill: parent
+                anchors.top: parent.top
+                anchors.left: parent.left
+                anchors.right: parent.right
+                implicitHeight: parent.height-Settings.margin
 
                 Applications {
                     id: apps

@@ -17,6 +17,14 @@ CButton  {
     Timedate {
         id: popup
         implicitHeight: screen.height/3+(2*Settings.curve)
+        property bool popupIshovered: false
+
+        Timer {
+            id: cooldown
+            interval: 100
+            running: false
+            onTriggered: showPanel()
+        }
     }
 
     CText {
