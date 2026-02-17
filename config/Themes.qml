@@ -23,7 +23,7 @@ Scope {
     FolderListModel {
         id: wallpaperFolder
         folder: Qt.resolvedUrl("../assets/wallpapers/")
-        nameFilters: ["*.jpg","*.png"]
+        nameFilters: ["*.jpg","*.png", "*.jpeg"]
 
         onStatusChanged: if(status===FolderListModel.Ready) {
                              console.log("Successfully read folder")
