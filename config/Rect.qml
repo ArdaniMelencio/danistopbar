@@ -2,7 +2,7 @@ import QtQuick
 
 Rectangle {
     id: root
-    color   : Settings.theme.colours[2]
+    color   : Qt.darker(Settings.primaryColor, 1.1)
     radius  : Settings.curve
 
 }

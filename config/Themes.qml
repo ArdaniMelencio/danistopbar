@@ -1,38 +1,49 @@
 import Quickshell
 import Quickshell.Io
 import QtQuick
+import Qt.labs.folderlistmodel
 import Qt.labs.platform 1.1
 
 Scope {
 
-    property list<string> wallpaperList:
-        [
-            "spyfamily.png",
-            "toori.jpg",
-            "saka.jpg",
-            "cinna.jpg",
-            "sakamoto.jpg",
-            "chisa.jpg",
-            "chisa2.jpg",
-        ]
+    property var config : JSON.parse(File.read("config.json"))
 
-    property var currentWallpaper : wallpaperList[0]
+    property bool loaded : false
+
+    property list<string> wallpaperList
 
     property string homeDir: StandardPaths.writableLocation(StandardPaths.HomeLocation)
-    property url defaultWallpaper: Qt.resolvedUrl("../assets/wallpapers/" + currentWallpaper)
+    property var currentWallpaper
+    property url defaultWallpaper: currentWallpaper ? Qt.resolvedUrl("../assets/wallpapers/" + currentWallpaper) : Qt.resolvedUrl("../assets/wallpapers/1.jpg")
+    property string link: ".config/quickshell/assets/wallpapers/" + currentWallpaper //used by hyprctl
 
-    property url userWallpaper
+    onWallpaperListChanged: if (wallpaperList) currentWallpaper = wallpaperList[0]
+    onLinkChanged: wait.running=true
 
-    property string link: defaultWallpaper.toString().split(homeDir)[1]
+    FolderListModel {
+        id: wallpaperFolder
+        folder: Qt.resolvedUrl("../assets/wallpapers/")
+        nameFilters: ["*.jpg","*.png", "*.jpeg"]
 
-    onLinkChanged: wiat.running=true
+        onStatusChanged: if(status===FolderListModel.Ready) {
+                             console.log("Successfully read folder")
+                             loaded = true
+                             for (var i = 0; i < wallpaperFolder.count; i++ ){
+                                 wallpaperList[i] = wallpaperFolder.get(i, "fileName")
+                             }
+                         }
+    }
 
     ColorQuantizer {
         id: themeColors
 
         source: defaultWallpaper
-        depth: 5
-        rescaleSize: 32
+        depth: 3
+        rescaleSize: 10
+    }
+
+    function changeWallpaper(index){
+        currentWallpaper = wallpaperList[index]
     }
 
     property list<color> colours: themeColors.colors
@@ -46,11 +57,10 @@ Scope {
             ",",
             "~"+link
         ]
-
-        Component.onCompleted: console.log(link)
     }
+
     Timer {
-        id: wiat
+        id: wait
         interval: 50
         onTriggered: changeWallpaper.running=true
     }

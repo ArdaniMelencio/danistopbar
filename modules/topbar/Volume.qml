@@ -3,15 +3,27 @@ import QtQuick.Layouts
 import QtQuick.Controls
 import Quickshell.Io
 import Quickshell.Hyprland
+import Quickshell.Services.Pipewire
 import "../../config"
 
 CButton {
     implicitWidth: parent.width/6
 
+
+    property real volume: if (pipewireTracker.objects[0].isSink) pipewireTracker.objects[0].audio.volume * 100
+
+    onVolumeChanged: getSinkValue.running = true//speaker.value = volume
+
+    PwObjectTracker {
+        id: pipewireTracker
+        objects: {
+            Pipewire.defaultAudioSink
+        }
+    }
+
     onClicked: {
     	Hyprland.dispatch("exec pavucontrol --tab=3")
     }
-
 
     function changeAudio(value, slider){
         if (slider === "sink") Hyprland.dispatch("exec pactl set-sink-volume @DEFAULT_SINK@ " + value + "%")
@@ -50,14 +62,15 @@ CButton {
             from: 153
             to: 0
 
-            onValueChanged: {
-                changeAudio(value, "sink")
-            }
-
+            onValueChanged: changeAudio(value, "sink")
+                /*{
+                pipewireTracker.objects[0].audio.volume = value
+                //console.log(pipewireTracker.objects[0].name + ":" + pipewireTracker.objects[0].audio.volume)
+                }*/
             background : Rect {
                 implicitWidth: speaker.visualPosition * parent.width
                 implicitHeight: parent.height
-                color: mainBar.primary
+                color: Settings.sliderBgColor
             }
 
             contentItem: Item {
@@ -69,7 +82,7 @@ CButton {
                     height: parent.height
 
                     x: Math.min((speaker.visualPosition * parent.width),parent.width-parent.height)
-                    color: Qt.darker(Settings.theme.colours[22],1.2)
+                    color: Settings.sliderColor
                 }
             }
 
@@ -77,7 +90,7 @@ CButton {
                 anchors.centerIn: parent
 
                 text : "SPEAKER"
-                font.pixelSize: Settings.fontSize
+                font.pixelSize: Settings.fontSize.regular
             }
 
 
@@ -103,7 +116,7 @@ CButton {
             background : Rect {
                 implicitWidth: mic.visualPosition * parent.width
                 implicitHeight: parent.height
-                color: mainBar.primary
+                color: Settings.sliderBgColor
             }
 
             contentItem: Item {
@@ -115,7 +128,7 @@ CButton {
                     height: parent.height
 
                     x: Math.min((mic.visualPosition * parent.width),parent.width-parent.height)
-                    color: Qt.darker(Settings.theme.colours[22],1.2)
+                    color: Settings.sliderColor
                 }
             }
 
@@ -123,7 +136,7 @@ CButton {
                 anchors.centerIn: parent
 
                 text : "MIC"
-                font.pixelSize: Settings.fontSize
+                font.pixelSize: Settings.fontSize.regular
             }
 
 

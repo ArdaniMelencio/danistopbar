@@ -10,7 +10,6 @@ Rect {
     Layout.fillWidth: true
     Layout.rightMargin: Settings.margin
     Layout.topMargin: Settings.margin
-    color: Qt.alpha(Settings.theme.colours[2],0.2)
 
     property var ipLoc
     property var result
@@ -43,20 +42,32 @@ Rect {
                     anchors.left: parent.left
                     anchors.leftMargin: Settings.margin
                     anchors.topMargin: result ? 0 : Settings.margin*2
-                    font.pixelSize: result ? Settings.fontSize*5 : Settings.fontSize*2
+                    font.pixelSize: result ? Settings.fontSize.huge * (parent.height/50): Settings.fontSize.regular
 
                     text: result ? result.hourly.temperature_2m[23] + result.hourly_units.temperature_2m : "Couldn't connect to API"
                     Component.onCompleted: callIpAPI()
                 }
 
                 CText {
+                    id: probability
                     anchors.top: temp.bottom
                     anchors.left: parent.left
                     anchors.leftMargin: Settings.margin
 
-                    font.pixelSize: Settings.fontSize*1.5
+                    font.pixelSize: Settings.fontSize.regular * (parent.height/75)
 
                     text: result ? result.hourly.precipitation_probability[23] + result.hourly_units.precipitation_probability + " chance of rain": "..."
+                }
+
+                CText {
+                    id: loc
+                    anchors.top: probability.bottom
+                    anchors.left: parent.left
+                    anchors.leftMargin: Settings.margin
+
+                    font.pixelSize: Settings.fontSize.regular * (parent.height/75)
+
+                    text: ipLoc ? ipLoc.country + "/" + ipLoc.city : ""
                 }
             }
 
@@ -94,18 +105,24 @@ Rect {
                      ]
 
 
-                ColumnLayout {
+                Rect {
                     required property int modelData
 
                     Layout.fillHeight: true
                     Layout.fillWidth: true
                     Layout.margins: Settings.margin
 
-                    WMOIcon {
+                    color: "transparent"
 
-                        Layout.alignment: Qt.AlignCenter
+                    WMOIcon {
+                        id: weatherIcon
+
+                        anchors.top: parent.top
+                        anchors.horizontalCenter: parent.horizontalCenter
+
                         implicitHeight: parent.height/1.5
                         implicitWidth: parent.height/1.5
+
                         border.color: Qt.alpha(Settings.theme.colours[2],0.2)
                         color: "transparent"
                         currentHour: currentDate.getHours()
@@ -113,8 +130,11 @@ Rect {
                     }
 
                     CText {
-                        Layout.alignment: Qt.AlignCenter
-                        font.pixelSize: Settings.fontSize
+
+                        anchors.top: weatherIcon.bottom
+                        anchors.horizontalCenter: parent.horizontalCenter
+
+                        font.pixelSize: Settings.fontSize.large * (parent.height/75)
                         text: result ? result.hourly.temperature_2m[modelData] + result.hourly_units.temperature_2m: "-173°C"
                     }
 
@@ -171,7 +191,7 @@ Rect {
 
     Timer {
         id: apiCall
-        interval: request ? 1000*60*15 : 1000*5
+        interval: result ? 1000*60*15 : 1000*5
         repeat: true
         onTriggered: {
             callWeatherAPI()
