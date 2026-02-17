@@ -57,7 +57,7 @@ CButton {
             background : Rect {
                 implicitWidth: speaker.visualPosition * parent.width
                 implicitHeight: parent.height
-                color: mainBar.primary
+                color: Settings.sliderBgColor
             }
 
             contentItem: Item {
@@ -69,7 +69,7 @@ CButton {
                     height: parent.height
 
                     x: Math.min((speaker.visualPosition * parent.width),parent.width-parent.height)
-                    color: Qt.darker(Settings.theme.colours[22],1.2)
+                    color: Settings.sliderColor
                 }
             }
 
@@ -77,7 +77,7 @@ CButton {
                 anchors.centerIn: parent
 
                 text : "SPEAKER"
-                font.pixelSize: Settings.fontSize
+                font.pixelSize: Settings.fontSize.regular
             }
 
 
@@ -103,7 +103,7 @@ CButton {
             background : Rect {
                 implicitWidth: mic.visualPosition * parent.width
                 implicitHeight: parent.height
-                color: mainBar.primary
+                color: Settings.sliderBgColor
             }
 
             contentItem: Item {
@@ -115,7 +115,7 @@ CButton {
                     height: parent.height
 
                     x: Math.min((mic.visualPosition * parent.width),parent.width-parent.height)
-                    color: Qt.darker(Settings.theme.colours[22],1.2)
+                    color: Settings.sliderColor
                 }
             }
 
@@ -123,7 +123,7 @@ CButton {
                 anchors.centerIn: parent
 
                 text : "MIC"
-                font.pixelSize: Settings.fontSize
+                font.pixelSize: Settings.fontSize.regular
             }
 
 

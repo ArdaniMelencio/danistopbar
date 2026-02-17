@@ -11,7 +11,7 @@ CButton {
     CText {
         anchors.centerIn: parent
         text: "APPS"
-        font.pixelSize: Settings.fontSize*1.4
+        font.pixelSize: Settings.fontSize.large
     }
 
     onClicked: {
