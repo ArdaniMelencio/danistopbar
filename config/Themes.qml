@@ -14,7 +14,7 @@ Scope {
 
     property string homeDir: StandardPaths.writableLocation(StandardPaths.HomeLocation)
     property var currentWallpaper
-    property url defaultWallpaper: currentWallpaper ? Qt.resolvedUrl("../assets/wallpapers/" + currentWallpaper) : Qt.resolvedUrl("../assets/wallpapers/1.jpg")
+    property url defaultWallpaper: currentWallpaper ? Qt.resolvedUrl("../assets/wallpapers/" + currentWallpaper) : Qt.resolvedUrl("../assets/wallpapers/1.png")
     property string link: ".config/quickshell/assets/wallpapers/" + currentWallpaper //used by hyprctl
 
     onWallpaperListChanged: if (wallpaperList) currentWallpaper = wallpaperList[0]
