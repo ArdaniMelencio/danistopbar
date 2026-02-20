@@ -145,9 +145,6 @@ Rect {
         }
     }
 
-
-
-
     function callIpAPI(){
         var xmlReq = new XMLHttpRequest()
         xmlReq.onreadystatechange = function(){
@@ -202,7 +199,7 @@ Rect {
     Timer {
         id: ipCall
         interval: 1000*30
-        running: true
+        running: ext.visible
         repeat: true
         onTriggered: callIpAPI()
     }

@@ -5,12 +5,16 @@ import Quickshell.Io
 import Quickshell.Hyprland
 import Quickshell.Services.Pipewire
 import "../../config"
-
+import "../volumeWindow"
 CButton {
+    id: volRef
     implicitWidth: parent.width/6
 
-
-    property real volume: if (pipewireTracker.objects[0].isSink) pipewireTracker.objects[0].audio.volume * 100
+    property bool isOpened
+    property real volume: if (pipewireTracker.objects[0]) {
+                            if (pipewireTracker.objects[0].isSink) pipewireTracker.objects[0].audio.volume * 100
+                            else 50
+                          }
 
     onVolumeChanged: getSinkValue.running = true//speaker.value = volume
 
@@ -19,10 +23,6 @@ CButton {
         objects: {
             Pipewire.defaultAudioSink
         }
-    }
-
-    onClicked: {
-    	Hyprland.dispatch("exec pavucontrol --tab=3")
     }
 
     function changeAudio(value, slider){
@@ -48,6 +48,43 @@ CButton {
         }
     }
 
+    onClicked: {
+        if (!perf.isOpened && !time.isOpened) showPanel()
+        else panelCooldown.running = true
+        if (perf.isOpened) perf.showPanel()
+        if (time.isOpened) time.showPanel()
+    }
+
+    Timer {
+        id: panelCooldown
+        interval: 200
+        onTriggered: {
+            showPanel()
+        }
+    }
+
+    function showPanel(){
+        if (!isOpened){
+            isOpened = true
+            popup.panelY = 0
+        }
+        else if (isOpened) {
+            isOpened = false
+            popup.panelY = -popup.height
+        }
+    }
+
+    VolumePanel {
+        id: popup
+        property bool popupIshovered: false
+        Timer {
+            id: cooldown
+            interval: 100
+            running: false
+            onTriggered: showPanel()
+        }
+    }
+
     RowLayout {
         anchors.fill: parent
         anchors.margins: Settings.margin
@@ -63,10 +100,7 @@ CButton {
             to: 0
 
             onValueChanged: changeAudio(value, "sink")
-                /*{
-                pipewireTracker.objects[0].audio.volume = value
-                //console.log(pipewireTracker.objects[0].name + ":" + pipewireTracker.objects[0].audio.volume)
-                }*/
+
             background : Rect {
                 implicitWidth: speaker.visualPosition * parent.width
                 implicitHeight: parent.height

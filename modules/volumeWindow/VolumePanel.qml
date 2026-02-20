@@ -10,7 +10,10 @@ import "../../config"
 
 PanelWindow{
     id: popup
+
     anchors.top: ref.bottom
+    anchors.left: true
+    margins.left: volRef.x - (volRef.width/2)
     implicitWidth: screen.width/3
     implicitHeight: screen.height/3+(2*Settings.curve)
 
@@ -18,8 +21,8 @@ PanelWindow{
 
     exclusiveZone: 0
     focusable: true
-
     color: "transparent"
+
     Behavior on panelY {
         NumberAnimation {
             duration:300
@@ -40,11 +43,9 @@ PanelWindow{
     onPanelYChanged: {
         if (panelY === -height) {
             popup.WlrLayershell.layer = WlrLayer.Background
-            ext.visible = false
         }
         else  {
             popup.WlrLayershell.layer = WlrLayer.Overlay
-            ext.visible = true
         }
     }
 
@@ -54,7 +55,7 @@ PanelWindow{
         width: parent.width
         layer.samples: 4
         layer.enabled: true
-        //y: panelY
+
         ShapePath {
             id: path
 
@@ -81,65 +82,6 @@ PanelWindow{
             PathArc { x: width; y: 0
                 radiusX: path.shapeCurve; radiusY: Settings.curve
             }
-        }
-    }
-
-    Rect {
-        id: ext
-        color: 'transparent'
-        implicitHeight: parent.height
-        implicitWidth: parent.width-(2*Settings.curve)
-        anchors.horizontalCenter: shapeRef.horizontalCenter
-        topRightRadius: 0
-        topLeftRadius: 0
-
-        y : panelY
-
-        GridLayout {
-            anchors.fill: parent
-            columns: 2
-            rows: 2
-
-            uniformCellHeights: true
-            uniformCellWidths: true
-
-
-            DatePanel { }
-
-            WeatherAPI { }
-
-            Rect{
-                Layout.fillHeight: true
-                Layout.fillWidth: true
-                Layout.margins: Settings.margin
-                Layout.bottomMargin: Settings.margin*2
-                Layout.topMargin: 0
-                Layout.columnSpan: 2
-
-                CText {
-                    id: mainTime
-                    anchors.top: parent.top
-                    anchors.horizontalCenter: parent.horizontalCenter
-                    anchors.margins: Settings.margin
-                    anchors.leftMargin: Settings.margin*5
-
-                    font.family: Settings.fonts.time
-
-                    text: Qt.formatDateTime(currentDate, "hh:mm:ss t")
-                    font.pixelSize: Settings.fontSize.huge*(parent.height/100)
-                }
-                CText {
-                    anchors.top: mainTime.bottom
-                    anchors.horizontalCenter: parent.horizontalCenter
-                    anchors.margins: Settings.margin
-                    anchors.leftMargin: Settings.margin*5
-                    font.family: Settings.fonts.time
-
-                    text: currentDate.toUTCString().split(" ")[3] + " UTC"
-                    font.pixelSize: Settings.fontSize.large
-                }
-            }
-
         }
     }
 }

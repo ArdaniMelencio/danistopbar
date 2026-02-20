@@ -10,4 +10,6 @@ CButton {
     onIChanged: function(){
         Settings.theme.currentWallpaper = Settings.theme.wallpaperList[i]
     }
+
+
 }

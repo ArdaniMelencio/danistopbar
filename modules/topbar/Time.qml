@@ -11,13 +11,10 @@ CButton  {
     implicitHeight: ref.height-10
 
     property bool isOpened: false
-
     property date currentDate : new Date()
 
     Timedate {
         id: popup
-        implicitHeight: screen.height/3+(2*Settings.curve)
-        property bool popupIshovered: false
 
         Timer {
             id: cooldown
@@ -35,7 +32,20 @@ CButton  {
         anchors.centerIn: parent
     }
 
-    onHoveredChanged:  showPanel()
+    onClicked: {
+        if (!perf.isOpened && !vol.isOpened) showPanel()
+        else panelCooldown.running = true
+        if (perf.isOpened) perf.showPanel()
+        if (vol.isOpened) vol.showPanel()
+    }
+
+    Timer {
+        id: panelCooldown
+        interval: 200
+        onTriggered: {
+            showPanel()
+        }
+    }
 
     function showPanel(){
         if (!isOpened){

@@ -24,15 +24,7 @@ Scope {
 
             WlrLayershell.layer: WlrLayer.Top
             exclusiveZone: ref.height
-
-            HoverHandler {
-                onHoveredChanged: {
-                    if (hovered) {
-                        isHovered = true
-                    }
-                    else isHovered = false
-                }
-            }
+            focusable: false
 
             anchors {
                 left: true
@@ -40,7 +32,7 @@ Scope {
                 right: true
             }
 
-            implicitHeight:40
+            implicitHeight:50
             color: "transparent"
 
             Behavior on implicitHeight {
@@ -59,7 +51,6 @@ Scope {
                 source: ref
                 anchors.fill: parent
 
-                //WlrLayershell.layer: WlrLayer.Bottom
             }
 
             Rectangle {
@@ -69,7 +60,7 @@ Scope {
                 anchors.top: parent.top
                 anchors.left: parent.left
                 anchors.right: parent.right
-                implicitHeight: parent.height-Settings.margin
+                implicitHeight: 40
 
                 Applications {
                     id: apps

@@ -3,11 +3,13 @@ import QtQuick.Layouts
 import QtQuick.Controls
 import Quickshell.Io
 import "../../config"
+import "../performanceWindow"
 
 CButton {
     id: perfRoot
     implicitWidth: parent.width/6
 
+    property bool isOpened: false
     property real cpu
     property real ramTotal
     property real ram
@@ -28,6 +30,42 @@ CButton {
         }
     }
 
+    onClicked: {
+        if (!time.isOpened && !vol.isOpened) showPanel()
+        else panelCooldown.running = true
+        if (time.isOpened) time.showPanel()
+        if (vol.isOpened) vol.showPanel()
+    }
+
+    Timer {
+        id: panelCooldown
+        interval: 200
+        onTriggered: {
+            showPanel()
+        }
+    }
+
+    function showPanel(){
+        if (!isOpened){
+            isOpened = true
+            popup.panelY = 0
+        }
+        else if (isOpened) {
+            isOpened = false
+            popup.panelY = -popup.height
+        }
+    }
+
+    SystemStats {
+        id: popup
+        property bool popupIshovered: false
+        Timer {
+            id: cooldown
+            interval: 100
+            running: false
+            onTriggered: showPanel()
+        }
+    }
 
     RowLayout {
         anchors.fill: parent
@@ -147,7 +185,6 @@ CButton {
         }
     }
 
-
     Timer {
         interval: 1000
         running: true
@@ -157,4 +194,5 @@ CButton {
             ramProc.running = true
         }
     }
+
 }
