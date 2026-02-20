@@ -31,7 +31,7 @@ Singleton {
 
     readonly property Themes theme : Themes{}
 
-    property color primaryColor: theme?.colours ? theme?.colours[2] : Qt.rgba(0.3,0.02,0.2,1)
+    property color primaryColor: theme?.colours ? theme?.colours[6] : Qt.rgba(0.3,0.02,0.2,1)
     property color sliderColor: Qt.darker(primaryColor,lightMultiplier)
     property color sliderBgColor: Qt.darker(primaryColor, 1.5)
     property color textColor: Qt.lighter(primaryColor,lightMultiplier)
